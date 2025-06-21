@@ -1,0 +1,53 @@
+{
+  "[javascript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+    "editor.formatOnSave": true
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[svg]": {
+    "editor.formatOnSave": false,
+    "files.insertFinalNewline": false
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+    "editor.formatOnSave": true
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+    "editor.formatOnSave": true
+  },
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "tailwindCSS.experimental.classRegex": [
+    [
+      "cva\\(([^)]*)\\)",
+      "[\"'`]([^\"'`]*).*?[\"'`]"
+    ],
+    [
+      "sharedCn\\(([^)]*)\\)",
+      "[\"'`]([^\"'`]*).*?[\"'`]"
+    ],
+    [
+      "\\w*Style\\s*=\\s*\"([^\"]*?)\""
+    ],
+  ],
+  "files.associations": {
+    "app.css": "tailwindcss",
+  },
+  "commentAnchors.tags.separators": [
+    " - "
+  ],
+  "commentAnchors.tags.anchors": {
+    "ANCHOR": {
+      "enabled": false,
+      "scope": "workspace"
+    }
+  }
+}
