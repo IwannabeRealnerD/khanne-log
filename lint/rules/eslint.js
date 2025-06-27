@@ -5,4 +5,5 @@ export const eslintRules = {
   "object-shorthand": ["error", "always"],
   "no-unused-vars": "off",
   "arrow-body-style": "off",
+  "no-redeclare": "off",
 };

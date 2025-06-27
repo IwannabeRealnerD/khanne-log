@@ -8,6 +8,7 @@ import eslintPluginPrettier from "eslint-plugin-prettier";
 import reactPlugin from "eslint-plugin-react";
 import reactHooks from "eslint-plugin-react-hooks";
 import unicornPlugin from "eslint-plugin-unicorn";
+import unusedImportsPlugin from "eslint-plugin-unused-imports";
 import globals from "globals";
 import tseslint from "typescript-eslint";
 
@@ -59,6 +60,7 @@ const eslintConfig = defineConfig([
       react: reactPlugin,
       "@next/next": nextPlugin,
       "react-hooks": reactHooks,
+      "unused-imports": unusedImportsPlugin,
       unicorn: unicornPlugin,
     },
     rules: {

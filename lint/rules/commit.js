@@ -1,5 +1,13 @@
 /** @type {import("eslint").Linter.Config[]} */
 export const commitRules = {
-  "@typescript-eslint/no-unused-vars": "error",
+  "unused-imports/no-unused-vars": [
+    "error",
+    {
+      args: "after-used",
+      argsIgnorePattern: "^_",
+      vars: "all",
+      varsIgnorePattern: "^_",
+    },
+  ],
   "no-console": "error",
 };

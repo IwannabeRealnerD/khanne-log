@@ -5,6 +5,7 @@ import tseslint from "typescript-eslint";
 export const namingConventionConfigs = defineConfig([
   {
     files: ["src/constants/**/*.{ts,tsx}"],
+    ignores: ["src/constants/**/internal/**/*.{ts,tsx}"],
     plugins: { "@typescript-eslint": tseslint.plugin },
     rules: {
       "@typescript-eslint/naming-convention": [
@@ -20,6 +21,7 @@ export const namingConventionConfigs = defineConfig([
   },
   {
     files: ["src/utils/**/*.{ts,tsx}"],
+    ignores: ["src/utils/**/internal/**/*.{ts,tsx}"],
     plugins: { "@typescript-eslint": tseslint.plugin },
     rules: {
       "@typescript-eslint/naming-convention": [
@@ -35,6 +37,7 @@ export const namingConventionConfigs = defineConfig([
   },
   {
     files: ["src/hooks/**/*.{ts,tsx}"],
+    ignores: ["src/hooks/**/internal/**/*.{ts,tsx}"],
     plugins: { "@typescript-eslint": tseslint.plugin },
     rules: {
       "@typescript-eslint/naming-convention": [
@@ -50,6 +53,7 @@ export const namingConventionConfigs = defineConfig([
   },
   {
     files: ["src/types/**/*.{ts,tsx}"],
+    ignores: ["src/types/**/internal/**/*.{ts,tsx}"],
     plugins: { "@typescript-eslint": tseslint.plugin },
     rules: {
       "@typescript-eslint/naming-convention": [
@@ -65,8 +69,8 @@ export const namingConventionConfigs = defineConfig([
   },
   {
     files: ["src/components/**/*.{ts,tsx}"],
+    ignores: ["src/components/**/internal/**/*.{ts,tsx}"],
     plugins: { "@typescript-eslint": tseslint.plugin },
-    ignores: ["src/components/**/internal/**"],
     rules: {
       "@typescript-eslint/naming-convention": [
         "error",
@@ -81,6 +85,7 @@ export const namingConventionConfigs = defineConfig([
   },
   {
     files: ["src/apis/**/*.+(ts|tsx)"],
+    ignores: ["src/apis/**/internal/**/*.{ts,tsx}"],
     plugins: { "@typescript-eslint": tseslint.plugin },
     rules: {
       "@typescript-eslint/naming-convention": [
@@ -96,6 +101,7 @@ export const namingConventionConfigs = defineConfig([
   },
   {
     files: ["src/apis/hooks/**.tsx"],
+    ignores: ["src/apis/hooks/**/internal/**/*.{ts,tsx}"],
     plugins: { "@typescript-eslint": tseslint.plugin },
     rules: {
       "@typescript-eslint/naming-convention": [
@@ -110,7 +116,22 @@ export const namingConventionConfigs = defineConfig([
     },
   },
   {
-    files: ["src/pages/**/**.page.tsx"],
+    files: ["src/**/internal/**/*.{ts,tsx}"],
+    plugins: { "@typescript-eslint": tseslint.plugin },
+    rules: {
+      "@typescript-eslint/naming-convention": [
+        "error",
+        {
+          format: ["StrictPascalCase", "UPPER_CASE"],
+          modifiers: ["exported"],
+          prefix: ["internal", "Internal", "INTERNAL_"],
+          selector: ["function", "variable", "typeAlias", "interface"],
+        },
+      ],
+    },
+  },
+  {
+    files: ["src/app/**/page.tsx"],
     plugins: { "@typescript-eslint": tseslint.plugin },
     rules: {
       "@typescript-eslint/naming-convention": [
@@ -120,6 +141,21 @@ export const namingConventionConfigs = defineConfig([
           modifiers: ["exported"],
           selector: ["function", "variable"],
           suffix: ["Page"],
+        },
+      ],
+    },
+  },
+  {
+    files: ["src/app/**/layout.tsx"],
+    plugins: { "@typescript-eslint": tseslint.plugin },
+    rules: {
+      "@typescript-eslint/naming-convention": [
+        "error",
+        {
+          format: ["StrictPascalCase"],
+          modifiers: ["exported"],
+          selector: ["function", "variable"],
+          suffix: ["Layout", "metadata"],
         },
       ],
     },

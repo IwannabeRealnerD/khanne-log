@@ -53,4 +53,14 @@ export const importRules = {
       ],
     },
   ],
+  "unused-imports/no-unused-imports": "error",
+  "unused-imports/no-unused-vars": [
+    "warn",
+    {
+      args: "after-used",
+      argsIgnorePattern: "^_",
+      vars: "all",
+      varsIgnorePattern: "^_",
+    },
+  ],
 };
