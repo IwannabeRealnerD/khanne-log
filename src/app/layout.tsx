@@ -7,7 +7,7 @@ import "../styles/app.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  description: "khanne이 좋아하는 영화, 드라마, 게임을 기록하는 웹 프로젝트",
+  description: "web project for khanne's favorite movies, series, and games",
   title: "Khanne Log",
 };
 
