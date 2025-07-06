@@ -16,6 +16,9 @@ export const InternalLineListSection = async () => {
     ],
   });
 
+  // eslint-disable-next-line no-console
+  console.log(database);
+
   if (database === undefined) {
     return <p>No items to show</p>;
   }
