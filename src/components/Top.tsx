@@ -5,5 +5,5 @@ interface GlobalTopProps {
 }
 
 export const GlobalTop: FunctionComponent<GlobalTopProps> = ({ children }) => {
-  return <div className="text-2xl font-bold">{children}</div>;
+  return <h2 className="text-2xl font-bold">{children}</h2>;
 };

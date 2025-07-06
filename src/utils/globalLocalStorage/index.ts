@@ -1,3 +1,5 @@
+"use client";
+
 import { GLOBAL_DATE_PREFIX } from "@/constants/date";
 
 import { LocalStorage } from "./type";
