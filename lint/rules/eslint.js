@@ -6,4 +6,5 @@ export const eslintRules = {
   "no-unused-vars": "off",
   "arrow-body-style": "off",
   "no-redeclare": "off",
+  "no-console": "warn",
 };
