@@ -2,14 +2,14 @@ import { Suspense } from "react";
 
 import { GlobalTop } from "@/components/Top";
 
-import { LineSection } from "./sections/LineSection";
+import { InternalLineListSection } from "./internal/line-list-section";
 
 const LinePage = async () => {
   return (
     <div>
       <GlobalTop>좋아하는 대사 모음집</GlobalTop>
       <Suspense fallback={<div>Loading...</div>}>
-        <LineSection />
+        <InternalLineListSection />
       </Suspense>
     </div>
   );

@@ -1,6 +1,6 @@
-import { globalGetDatabase } from "../../../../utils/notion/getDatabase";
+import { globalGetDatabase } from "../../../utils/notion/getDatabase";
 
-export const LineSection = async () => {
+export const InternalLineListSection = async () => {
   const database = await globalGetDatabase("LINE", {
     filter: {
       property: "is_done",
