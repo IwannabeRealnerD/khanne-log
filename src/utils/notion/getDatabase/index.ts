@@ -15,10 +15,11 @@ import {
 import { internalQueryNotionDatabase } from "./internal/queryNotionDatabase";
 
 type LineData = {
+  id: string;
   title: string | null;
   quote: string | null;
   from: string | null;
-  sub_title: string | null;
+  scene_description: string | null;
   key_points: string[];
   comment: string | null;
   when: string | null;
@@ -48,10 +49,11 @@ export async function globalGetDatabase(
         }
         if (databaseName === "LINE") {
           return {
+            id: result.id,
             title: globalGetTitle(result.properties.title),
             quote: globalGetRichText(result.properties.quote),
             from: globalGetSelect(result.properties.from),
-            sub_title: globalGetRichText(result.properties.sub_title),
+            scene_description: globalGetRichText(result.properties.scene_description),
             key_points: globalGetMultiSelect(result.properties.key_points),
             comment: globalGetRichText(result.properties.comment),
             when: globalGetRichText(result.properties.when),
