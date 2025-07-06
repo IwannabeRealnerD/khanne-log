@@ -5,7 +5,7 @@ on:
     types:
       - opened
       - reopened
-      - synchronize
+      - edited
 
 jobs:
   check-branch:
