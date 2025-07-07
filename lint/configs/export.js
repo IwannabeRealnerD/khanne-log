@@ -14,6 +14,8 @@ export const exportConfigs = defineConfig([
       "src/app/**/route.tsx",
       "src/app/**/template.tsx",
       "src/app/**/default.tsx",
+      "src/middleware.ts",
+      "src/i18n/request.ts",
       "**/*.stories.ts",
     ],
     rules: { "import/no-default-export": "error" },
