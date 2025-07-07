@@ -1,8 +1,12 @@
 import React from "react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { notFound } from "next/navigation";
 
-import "../styles/app.css";
+import { hasLocale } from "next-intl";
+
+import { routing } from "@/i18n/routing";
+import "../../styles/app.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -11,13 +15,13 @@ export const metadata: Metadata = {
   title: "Khanne Log",
 };
 
-const RootLayout = ({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) => {
+const RootLayout = async ({ children, params }: { children: React.ReactNode; params: Promise<{ locale: string }> }) => {
+  const { locale } = await params;
+  if (!hasLocale(routing.locales, locale)) {
+    notFound();
+  }
   return (
-    <html lang="en">
+    <html lang={locale}>
       <body className={inter.className}>
         <header className="flex w-full flex-row-reverse">
           <h1 className="pt-2 pr-3 text-gray-400">Khanne Log</h1>

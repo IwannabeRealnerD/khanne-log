@@ -49,5 +49,8 @@
       "enabled": false,
       "scope": "workspace"
     }
-  }
+  },
+  "i18n-ally.localesPaths": [
+    "src/i18n"
+  ]
 }
