@@ -1,4 +1,5 @@
 {
+  "ignore": ["node_modules", ".next", "dist"],
   "jsonRecursiveSort": true,
   "jsxSingleQuote": false,
   "plugins": ["prettier-plugin-sort-json", "prettier-plugin-tailwindcss"],
