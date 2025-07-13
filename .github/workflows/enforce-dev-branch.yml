@@ -1,4 +1,4 @@
-name: Verify Pull Request Originates from dev Branch
+name: Check isFromDev
 
 on:
   pull_request:
