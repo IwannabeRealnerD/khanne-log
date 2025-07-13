@@ -1,0 +1,34 @@
+nextjs-starter-kit:
+  - changed-files:
+      - any-glob-to-any-file:
+          - project/**
+create-nextjs-starter-kit:
+  - changed-files:
+      - any-glob-to-any-file:
+          - create/**
+CI:
+  - changed-files:
+      - any-glob-to-any-file:
+          - .github/**
+docs:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "**/**.md"
+          - "**/**.mdx"
+vscode-settings:
+  - changed-files:
+      - any-glob-to-any-file:
+          - ".vscode/**"
+turbo:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "turbo.json"
+packages:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "**/package.json"
+lint-formatting:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "**/.eslintrc.json"
+          - "**/.prettierrc.json"
