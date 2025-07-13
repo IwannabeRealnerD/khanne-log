@@ -79,7 +79,6 @@ const eslintConfig = defineConfig([
       ...nextRules,
       ...eslintConfigPrettier.rules,
       ...eslintRules,
-
       ...(process.env.IS_COMMIT_CHECK ? {} : { "prettier/prettier": ["error"] }),
       ...(process.env.IS_COMMIT_CHECK ? commitRules : []),
     },
