@@ -1,6 +1,6 @@
 import { writeFile } from "fs/promises";
 
-import { globalGetInfoFilePath } from "./getFilePath";
+import { globalGetFilePath } from "./globalGetFilePath";
 import { globalGetNotionDatabase } from "./globalGetNotionDatabase";
 
 (async () => {
@@ -19,7 +19,7 @@ import { globalGetNotionDatabase } from "./globalGetNotionDatabase";
     ],
   });
   if (database) {
-    const filePath = globalGetInfoFilePath("LINES");
+    const filePath = globalGetFilePath("LINES");
     await writeFile(filePath, JSON.stringify(database, null, 2), "utf-8");
     return database;
   } else {

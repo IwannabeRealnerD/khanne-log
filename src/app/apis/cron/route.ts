@@ -2,7 +2,7 @@ import { revalidateTag } from "next/cache";
 import { NextResponse } from "next/server";
 import { writeFile } from "fs/promises";
 
-import { globalGetInfoFilePath } from "@/utils/makeDatabase/getFilePath";
+import { globalGetFilePath } from "@/utils/makeDatabase/globalGetFilePath";
 import { globalGetNotionDatabase } from "@/utils/makeDatabase/globalGetNotionDatabase";
 
 export async function GET() {
@@ -23,7 +23,7 @@ export async function GET() {
       ],
     });
     if (database) {
-      const filePath = globalGetInfoFilePath("LINES");
+      const filePath = globalGetFilePath("LINES");
       await writeFile(filePath, JSON.stringify(database, null, 2), "utf-8");
 
       revalidateTag("lines");
