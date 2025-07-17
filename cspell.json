@@ -1,5 +1,16 @@
 {
   "language": "en",
   "version": "0.1",
-  "words": ["tseslint", "khanne", "tailwindStylesheet", "dbaeumer", "exodiusstudios", "bradlc"]
+  "words": [
+    "tseslint",
+    "khanne",
+    "tailwindStylesheet",
+    "proptypes",
+    "polyfillio",
+    "valibot",
+    "notionhq",
+    "dbaeumer",
+    "exodiusstudios",
+    "bradlc"
+  ]
 }

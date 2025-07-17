@@ -1,22 +1,12 @@
-import { globalGetDatabase } from "@/utils/notion/getDatabase";
+import { GlobalLine } from "@/types/DatabaseScheme";
 
 import { InternalMainTitle } from "./main-title";
 
 export const InternalLineListSection = async () => {
-  const database = await globalGetDatabase("LINE", {
-    filter: {
-      property: "is_done",
-      checkbox: {
-        equals: true,
-      },
-    },
-    sorts: [
-      {
-        property: "added_date",
-        direction: "ascending",
-      },
-    ],
-  });
+  const rawDatabaseResponse = await fetch("http://localhost:3000/ko/lines/apis", { next: { tags: ["lines"] } });
+
+  // FIXME - Should use valibot to parse the data
+  const database = (await rawDatabaseResponse.json()) as GlobalLine[];
 
   if (database === undefined) {
     return <p>No items to show</p>;
