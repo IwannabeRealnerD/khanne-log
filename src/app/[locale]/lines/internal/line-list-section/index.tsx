@@ -1,9 +1,11 @@
 import { GlobalLine } from "@/types/DatabaseScheme";
+import { globalGetFilePath } from "@/utils/makeDatabase/globalGetFilePath";
 
 import { InternalMainTitle } from "./main-title";
 
 export const InternalLineListSection = async () => {
-  const rawDatabaseResponse = await fetch("http://localhost:3000/ko/lines/apis", { next: { tags: ["lines"] } });
+  const filePath = globalGetFilePath("LINES");
+  const rawDatabaseResponse = await fetch(filePath, { next: { tags: ["lines"] } });
 
   // FIXME - Should use valibot to parse the data
   const database = (await rawDatabaseResponse.json()) as GlobalLine[];
