@@ -2,7 +2,7 @@
 
 import { GlobalQueryBody } from "@/types/QueryBody";
 
-export async function globalQueryNotionDatabase(databaseName: "LINE", queryBody?: GlobalQueryBody) {
+export async function internalQueryNotionDatabase(databaseName: "LINE", queryBody?: GlobalQueryBody) {
   const databaseId = process.env[`NOTION_DATABASE_ID_${databaseName}`];
   const integrationToken = process.env.NOTION_API_KEY;
 
@@ -20,6 +20,9 @@ export async function globalQueryNotionDatabase(databaseName: "LINE", queryBody?
       "Notion-Version": "2022-06-28",
     },
     body: queryBody ? JSON.stringify(queryBody) : undefined,
+    next: {
+      tags: ["lines"],
+    },
   });
 
   if (!response.ok) {

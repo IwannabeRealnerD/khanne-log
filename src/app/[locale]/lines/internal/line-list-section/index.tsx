@@ -1,14 +1,22 @@
-import { GlobalLine } from "@/types/DatabaseScheme";
-import { globalGetFilePath } from "@/utils/makeDatabase/globalGetFilePath";
+import { globalGetNotionDatabase } from "@/utils/globalGetNotionDatabase";
 
 import { InternalMainTitle } from "./main-title";
 
 export const InternalLineListSection = async () => {
-  const filePath = globalGetFilePath("LINES");
-  const rawDatabaseResponse = await fetch(filePath, { next: { tags: ["lines"] } });
-
-  // FIXME - Should use valibot to parse the data
-  const database = (await rawDatabaseResponse.json()) as GlobalLine[];
+  const database = await globalGetNotionDatabase("LINE", {
+    filter: {
+      property: "is_done",
+      checkbox: {
+        equals: true,
+      },
+    },
+    sorts: [
+      {
+        property: "added_date",
+        direction: "ascending",
+      },
+    ],
+  });
 
   if (database === undefined) {
     return <p>No items to show</p>;

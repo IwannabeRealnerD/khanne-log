@@ -6,16 +6,16 @@ import { InferInput, parse } from "valibot";
 
 import { GlobalLine, LineScheme } from "@/types/DatabaseScheme";
 import { GlobalQueryBody } from "@/types/QueryBody";
-import {
-  globalGetCheckbox,
-  globalGetCreatedTime,
-  globalGetMultiSelect,
-  globalGetRichText,
-  globalGetSelect,
-  globalGetTitle,
-} from "@/utils/notion/propertyType";
 
-import { globalQueryNotionDatabase } from "./globalQueryNotionDatabase";
+import {
+  internalGetCheckbox,
+  internalGetCreatedTime,
+  internalGetMultiSelect,
+  internalGetRichText,
+  internalGetSelect,
+  internalGetTitle,
+} from "./internal/propertyType";
+import { internalQueryNotionDatabase } from "./internal/queryNotionDatabase";
 
 export function globalGetNotionDatabase(
   databaseName: "LINE",
@@ -30,7 +30,7 @@ export async function globalGetNotionDatabase(
   if (!databaseName) {
     throw new Error("Database name is required");
   }
-  const response = (await globalQueryNotionDatabase(databaseName, queryBody)) as QueryDatabaseResponse;
+  const response = (await internalQueryNotionDatabase(databaseName, queryBody)) as QueryDatabaseResponse;
   if (response.results === undefined || response.results.length === 0) {
     return undefined;
   }
@@ -44,15 +44,15 @@ export async function globalGetNotionDatabase(
           const transformedLineItem = {
             // FIXME - Should use valibot to parse the data
             id: result.id,
-            title: globalGetTitle(result.properties.title),
-            quote: globalGetRichText(result.properties.quote),
-            from: globalGetSelect(result.properties.from),
-            scene_description: globalGetRichText(result.properties.scene_description),
-            key_points: globalGetMultiSelect(result.properties.key_points),
-            comment: globalGetRichText(result.properties.comment),
-            when: globalGetRichText(result.properties.when),
-            added_date: globalGetCreatedTime(result.properties.added_date),
-            is_spoiler: globalGetCheckbox(result.properties.is_spoiler),
+            title: internalGetTitle(result.properties.title),
+            quote: internalGetRichText(result.properties.quote),
+            from: internalGetSelect(result.properties.from),
+            scene_description: internalGetRichText(result.properties.scene_description),
+            key_points: internalGetMultiSelect(result.properties.key_points),
+            comment: internalGetRichText(result.properties.comment),
+            when: internalGetRichText(result.properties.when),
+            added_date: internalGetCreatedTime(result.properties.added_date),
+            is_spoiler: internalGetCheckbox(result.properties.is_spoiler),
           };
           try {
             parse(LineScheme, transformedLineItem);
