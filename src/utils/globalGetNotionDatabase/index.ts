@@ -4,6 +4,7 @@ import { isFullPage } from "@notionhq/client";
 import { QueryDatabaseResponse } from "@notionhq/client/build/src/api-endpoints";
 import { InferInput, parse } from "valibot";
 
+import { GLOBAL_DATABASE_NAME } from "@/constants/databaseName";
 import { GlobalLine, LineScheme } from "@/types/DatabaseScheme";
 import { GlobalQueryBody } from "@/types/QueryBody";
 
@@ -18,13 +19,13 @@ import {
 import { internalQueryNotionDatabase } from "./internal/queryNotionDatabase";
 
 export function globalGetNotionDatabase(
-  databaseName: "LINE",
+  databaseName: (typeof GLOBAL_DATABASE_NAME)[keyof typeof GLOBAL_DATABASE_NAME],
   queryBody?: GlobalQueryBody
 ): Promise<GlobalLine[] | undefined>;
 export function globalGetNotionDatabase(databaseName: undefined, queryBody?: undefined): Promise<undefined>;
 
 export async function globalGetNotionDatabase(
-  databaseName: "LINE" | undefined,
+  databaseName: (typeof GLOBAL_DATABASE_NAME)[keyof typeof GLOBAL_DATABASE_NAME] | undefined,
   queryBody?: GlobalQueryBody | undefined
 ): Promise<GlobalLine[] | undefined> {
   if (!databaseName) {
@@ -37,10 +38,10 @@ export async function globalGetNotionDatabase(
   if (response.results.length > 0 && isFullPage(response.results[0])) {
     const refinedResponse = response.results
       .map((result) => {
-        if (!isFullPage(result) || databaseName !== "LINE") {
+        if (!isFullPage(result) || databaseName !== "LINES") {
           throw new Error("Notion database query returned non-full page");
         }
-        if (databaseName === "LINE") {
+        if (databaseName === "LINES") {
           const transformedLineItem = {
             // FIXME - Should use valibot to parse the data
             id: result.id,

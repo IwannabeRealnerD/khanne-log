@@ -1,8 +1,12 @@
 "use server";
 
+import { GLOBAL_DATABASE_NAME } from "@/constants/databaseName";
 import { GlobalQueryBody } from "@/types/QueryBody";
 
-export async function internalQueryNotionDatabase(databaseName: "LINE", queryBody?: GlobalQueryBody) {
+export async function internalQueryNotionDatabase(
+  databaseName: (typeof GLOBAL_DATABASE_NAME)[keyof typeof GLOBAL_DATABASE_NAME],
+  queryBody?: GlobalQueryBody
+) {
   const databaseId = process.env[`NOTION_DATABASE_ID_${databaseName}`];
   const integrationToken = process.env.NOTION_API_KEY;
 
@@ -21,7 +25,7 @@ export async function internalQueryNotionDatabase(databaseName: "LINE", queryBod
     },
     body: queryBody ? JSON.stringify(queryBody) : undefined,
     next: {
-      tags: ["lines"],
+      tags: [databaseName],
     },
   });
 
