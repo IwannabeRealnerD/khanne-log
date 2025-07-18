@@ -1,9 +1,10 @@
-import { globalGetDatabase } from "@/utils/notion/getDatabase";
+import { GLOBAL_DATABASE_NAME } from "@/constants/databaseName";
+import { globalGetNotionDatabase } from "@/utils/globalGetNotionDatabase";
 
 import { InternalMainTitle } from "./main-title";
 
 export const InternalLineListSection = async () => {
-  const database = await globalGetDatabase("LINE", {
+  const database = await globalGetNotionDatabase(GLOBAL_DATABASE_NAME.LINES, {
     filter: {
       property: "is_done",
       checkbox: {
