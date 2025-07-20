@@ -3,29 +3,23 @@ import { globalGetNotionDatabase } from "@/utils/globalGetNotionDatabase";
 
 import { InternalMainTitle } from "./main-title";
 
-export const InternalLineListSection = async () => {
-  const database = await globalGetNotionDatabase(GLOBAL_DATABASE_NAME.LINES, {
-    filter: {
-      property: "is_done",
-      checkbox: {
-        equals: true,
-      },
-    },
-    sorts: [
-      {
-        property: "added_date",
-        direction: "ascending",
-      },
-    ],
-  });
+/**
+ * @description unstable_cache is used in order to cache the database response and fetchedAt property.
+ * @note this function will be replaced by "use cache" when it becomes stable.
+ * @see https://blog.logrocket.com/caching-next-js-unstable-cache/
+ */
 
-  if (database === undefined) {
+export const InternalLineListSection = async () => {
+  const databaseResponse = await globalGetNotionDatabase(GLOBAL_DATABASE_NAME.LINES);
+  if (databaseResponse === undefined) {
     return <p>No items to show</p>;
   }
 
   return (
     <div className="flex flex-col gap-2">
-      {database.map((item) => {
+      <p>updated at: {new Date(databaseResponse.fetchedAt).toUTCString()}</p>
+      <p>total items: {databaseResponse.data.length}</p>
+      {databaseResponse.data.map((item) => {
         const refinedTitles = (() => {
           if (!item.quote && item.scene_description) {
             return {

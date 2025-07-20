@@ -1,9 +1,15 @@
 import { revalidateTag } from "next/cache";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 import { GLOBAL_DATABASE_NAME } from "@/constants/databaseName";
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+  const authHeader = request.headers.get("authorization");
+  if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
+    return new Response("Unauthorized cron request", {
+      status: 401,
+    });
+  }
   try {
     revalidateTag(GLOBAL_DATABASE_NAME.LINES);
     return NextResponse.json({ message: "Database has been revalidated" });

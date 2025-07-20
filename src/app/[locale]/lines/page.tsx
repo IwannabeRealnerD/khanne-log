@@ -7,7 +7,7 @@ import { InternalLineListSection } from "./internal/line-list-section";
 const LinePage = async () => {
   return (
     <div>
-      <GlobalTop>좋아하는 대사 모음집</GlobalTop>
+      <GlobalTop>The lines I like</GlobalTop>
       <Suspense fallback={<div>Loading...</div>}>
         <InternalLineListSection />
       </Suspense>

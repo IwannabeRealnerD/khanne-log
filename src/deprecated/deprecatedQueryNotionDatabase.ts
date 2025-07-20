@@ -1,11 +1,14 @@
 "use server";
 
-import { GLOBAL_DATABASE_NAME } from "@/constants/databaseName";
-import { GlobalQueryBody } from "@/types/QueryBody";
+import { GlobalDatabaseName } from "@/types/DatabaseName";
+import { InternalQueryDatabaseParameters } from "@/utils/globalGetNotionDatabase/internal/QueryBody";
 
-export async function internalQueryNotionDatabase(
-  databaseName: (typeof GLOBAL_DATABASE_NAME)[keyof typeof GLOBAL_DATABASE_NAME],
-  queryBody?: GlobalQueryBody
+/**
+ * @deprecated - This function is deprecated and is remaining for reference.
+ */
+export async function internalDeprecatedQueryNotionDatabase(
+  databaseName: GlobalDatabaseName,
+  queryBody?: InternalQueryDatabaseParameters
 ) {
   const databaseId = process.env[`NOTION_DATABASE_ID_${databaseName}`];
   const integrationToken = process.env.NOTION_API_KEY;
@@ -24,9 +27,11 @@ export async function internalQueryNotionDatabase(
       "Notion-Version": "2022-06-28",
     },
     body: queryBody ? JSON.stringify(queryBody) : undefined,
-    next: {
-      tags: [databaseName],
-    },
+    // NOTE - Way to make post request cacheable
+    // cache: "force-cache",
+    // next: {
+    //   tags: [databaseName],
+    // },
   });
 
   if (!response.ok) {
