@@ -17,7 +17,7 @@
   },
   "scripts": {
     "analyze": "ANALYZE=true pnpm build",
-    "build": "pnpm dlx vite-node src/utils/makeDatabase/index.ts && next build",
+    "build": "next build",
     "dev": "next dev",
     "lint": "IS_COMMIT_CHECK=true eslint . --cache",
     "lint:analyze": "TIMING=1 IS_COMMIT_CHECK=true eslint .",
