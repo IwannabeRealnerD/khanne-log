@@ -17,8 +17,13 @@ export const InternalLineListSection = async () => {
 
   return (
     <div className="flex flex-col gap-2">
-      <p>updated at: {new Date(databaseResponse.fetchedAt).toUTCString()}</p>
-      <p>total items: {databaseResponse.data.length}</p>
+      <div className="flex flex-col gap-2 text-xs text-gray-500">
+        <p>updated at (UTC) - {new Date(databaseResponse.fetchedAt).toUTCString()}</p>
+        <p>
+          updated at (KST) - {new Date(databaseResponse.fetchedAt).toLocaleString("ko", { timeZone: "Asia/Seoul" })}
+        </p>
+        <p>total items: {databaseResponse.data.length}</p>
+      </div>
       {databaseResponse.data.map((item) => {
         const refinedTitles = (() => {
           if (!item.quote && item.scene_description) {
