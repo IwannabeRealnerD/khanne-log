@@ -24,6 +24,7 @@
     "lint:inspect": "pnpm dlx @eslint/config-inspector@latest",
     "test": "vitest run",
     "test:watch": "vitest",
+    "test:parse": "pnpm dlx vite-node test/utils/parseTest.ts",
     "start": "next start"
   },
   "devDependencies": {
