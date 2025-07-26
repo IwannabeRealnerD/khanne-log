@@ -62,7 +62,7 @@ export const namingConventionConfigs = defineConfig([
           format: ["StrictPascalCase"],
           modifiers: ["exported"],
           prefix: ["Global"],
-          selector: ["typeAlias", "interface"],
+          selector: ["typeAlias", "interface", "enum"],
         },
       ],
     },

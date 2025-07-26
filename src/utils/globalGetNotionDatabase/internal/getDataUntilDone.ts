@@ -1,15 +1,17 @@
 import { Client, isFullPage } from "@notionhq/client";
-import { parse } from "valibot";
+import { QueryDatabaseResponse } from "@notionhq/client/build/src/api-endpoints";
+import { pick, safeParse } from "valibot";
 
 import { GlobalDatabaseName } from "@/types/DatabaseName";
-import { GlobalLine, LineScheme } from "@/types/DatabaseScheme";
+import { GlobalLine, GlobalLineScheme } from "@/types/DatabaseScheme";
+import { GlobalOttServiceNameSchema } from "@/types/OttServiceName";
 
 import {
   internalGetCheckbox,
   internalGetCreatedTime,
   internalGetMultiSelect,
   internalGetRichText,
-  internalGetSelect,
+  internalGetSelectAsEnum,
   internalGetTitle,
 } from "./propertyType";
 import { InternalQueryDatabaseParameters } from "./QueryBody";
@@ -33,7 +35,7 @@ export const internalGetDataUntilDone = async (
   });
 
   const response = await notionClient.databases.query({
-    database_id: process.env.NOTION_LINES_DATABASE_ID!,
+    database_id: process.env.NOTION_LINES_DATABASE_ID,
     ...queryBody,
     start_cursor: nextCursor,
   });
@@ -43,30 +45,39 @@ export const internalGetDataUntilDone = async (
   }
 
   if (response.results.length > 0 && isFullPage(response.results[0])) {
-    response.results.forEach((result) => {
+    response.results.forEach((_result) => {
+      const result = _result as Extract<QueryDatabaseResponse["results"][number], { properties: unknown }>;
       if (!isFullPage(result)) {
         throw new Error("Notion database query returned non-full page");
       }
+
       if (databaseName === "LINES") {
-        const transformedLineItem = {
-          // FIXME - Should use valibot to parse the data
+        const refinedLineItem = {
           id: result.id,
-          title: internalGetTitle(result.properties.title),
-          quote: internalGetRichText(result.properties.quote),
-          from: internalGetSelect(result.properties.from),
-          scene_description: internalGetRichText(result.properties.scene_description),
+          title: internalGetTitle(result.properties.title, pick(GlobalLineScheme, ["title"]).entries.title),
+          quote: internalGetRichText(result.properties.quote, pick(GlobalLineScheme, ["quote"]).entries.quote),
+          from: internalGetSelectAsEnum(result.properties.from, GlobalOttServiceNameSchema),
+          scene_description: internalGetRichText(
+            result.properties.scene_description,
+            pick(GlobalLineScheme, ["scene_description"]).entries.scene_description
+          ),
           key_points: internalGetMultiSelect(result.properties.key_points),
-          comment: internalGetRichText(result.properties.comment),
-          when: internalGetRichText(result.properties.when),
-          added_date: internalGetCreatedTime(result.properties.added_date),
-          is_spoiler: internalGetCheckbox(result.properties.is_spoiler),
+          comment: internalGetRichText(result.properties.comment, pick(GlobalLineScheme, ["comment"]).entries.comment),
+          when: internalGetRichText(result.properties.when, pick(GlobalLineScheme, ["when"]).entries.when),
+          added_date: internalGetCreatedTime(
+            result.properties.added_date,
+            pick(GlobalLineScheme, ["added_date"]).entries.added_date
+          ),
+          is_spoiler: internalGetCheckbox(
+            result.properties.is_spoiler,
+            pick(GlobalLineScheme, ["is_spoiler"]).entries.is_spoiler
+          ),
         };
-        try {
-          parse(LineScheme, transformedLineItem);
-        } catch {
-          throw new Error(`Failed to parse line item: ${transformedLineItem.id}`);
+        const parsedData = safeParse(GlobalLineScheme, refinedLineItem);
+        if (!parsedData.success) {
+          throw new Error(`Failed to parse line item: ${parsedData.issues}`);
         }
-        copiedTempResults.push(transformedLineItem);
+        copiedTempResults.push(parsedData.output);
       }
     });
   }

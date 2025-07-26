@@ -1,16 +1,18 @@
 import { object, string, array, nullable, boolean, InferInput } from "valibot";
 
-export const LineScheme = object({
+import { GlobalOttServiceNameSchema } from "@/types/OttServiceName";
+
+export const GlobalLineScheme = object({
   id: string(),
-  title: nullable(string()),
+  title: string(),
   quote: nullable(string()),
-  from: nullable(string()),
-  scene_description: nullable(string()),
+  from: GlobalOttServiceNameSchema,
+  scene_description: string(),
   key_points: array(string()),
-  comment: nullable(string()),
-  when: nullable(string()),
-  added_date: nullable(string()),
+  comment: string(),
+  when: string(),
+  added_date: string(),
   is_spoiler: boolean(),
 });
 
-export type GlobalLine = InferInput<typeof LineScheme>;
+export type GlobalLine = InferInput<typeof GlobalLineScheme>;

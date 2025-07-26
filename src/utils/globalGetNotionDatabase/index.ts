@@ -17,7 +17,7 @@ export const globalGetNotionDatabase = (databaseName: GlobalDatabaseName) => {
         sorts: [
           {
             property: "added_date",
-            direction: "ascending",
+            direction: "descending",
           },
         ],
       }),
