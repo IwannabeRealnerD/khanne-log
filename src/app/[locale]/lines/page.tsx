@@ -2,7 +2,7 @@ import { Suspense } from "react";
 
 import { GlobalTop } from "@/components/Top";
 
-import { InternalLineListSection } from "./internal/line-list-section";
+import { InternalLineListSection } from "./section/line-list-section";
 
 const LinePage = async () => {
   return (
