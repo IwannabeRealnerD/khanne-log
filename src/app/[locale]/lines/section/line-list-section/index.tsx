@@ -1,17 +1,12 @@
 import { GLOBAL_DATABASE_NAME } from "@/constants/databaseName";
 import { globalGetNotionDatabase } from "@/utils/globalGetNotionDatabase";
 
-import { InternalMainTitle } from "../../internal/main-title";
-import { InternalOttBadge } from "../../internal/OttBadge";
-
-/**
- * @description unstable_cache is used in order to cache the database response and fetchedAt property.
- * @note this function will be replaced by "use cache" when it becomes stable.
- * @see https://blog.logrocket.com/caching-next-js-unstable-cache/
- */
+import { InternalMainTitle } from "./main-title";
+import { InternalOttBadge } from "./OttBadge";
 
 export const InternalLineListSection = async () => {
   const databaseResponse = await globalGetNotionDatabase(GLOBAL_DATABASE_NAME.LINES);
+
   if (databaseResponse === undefined) {
     return <p>No items to show</p>;
   }
@@ -60,20 +55,17 @@ export const InternalLineListSection = async () => {
 
           return (
             <article key={`${item.id}`}>
-              {item.added_date && (
-                <p className="text-right text-xs text-gray-400">{new Date(item.added_date).toLocaleDateString("ko")}</p>
-              )}
+              <p className="text-right text-xs text-gray-400">{new Date(item.added_date).toLocaleDateString("ko")}</p>
               <div className="rounded-xl border border-gray-200 p-4">
                 {refinedTitles.main}
                 <div className="mb-5 flex flex-col justify-between gap-2">
                   <div className="flex flex-col">
-                    <p className="text-base font-semibold">
-                      {item.title}
-                      <span className="text-sm font-normal"> - {item.when}</span>
-                    </p>
+                    <div className="flex items-center justify-between">
+                      <p className="text-base font-semibold">{item.title}</p>
+                      <InternalOttBadge ottName={item.from} />
+                    </div>
+                    <span className="text-sm font-normal">{item.when}</span>
                   </div>
-                  {/* <p className="text-base">{item.from}</p> */}
-                  <InternalOttBadge ottName={item.from} />
                   <div>
                     <p className="text-base">{item.key_points.join(", ")}</p>
                   </div>
