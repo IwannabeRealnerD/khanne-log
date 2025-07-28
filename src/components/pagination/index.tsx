@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
-import Link from "next/link";
 
 import { GLOBAL_INTERNAL_URL } from "@/constants/internal-url";
+import { Link } from "@/i18n/navigation";
 import { globalCn } from "@/utils/globalCn";
 
 import { internalGenerateVisiblePages } from "./internal/generateVisiblePages";
