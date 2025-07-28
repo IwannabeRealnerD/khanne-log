@@ -24,6 +24,6 @@ export const InternalOttBadge: FunctionComponent<InternalOttBadgeProps> = (props
     case "Movie":
       return <RiMovieLine className="text-2xl" />;
     default:
-      return null;
+      return props.ottName;
   }
 };

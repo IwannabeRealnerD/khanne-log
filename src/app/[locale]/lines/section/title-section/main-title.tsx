@@ -35,7 +35,7 @@ export const InternalMainTitle: FunctionComponent<InternalMainTitleProps> = (pro
   if (isTitleTooLong) {
     return (
       <button
-        className="mb-4 cursor-pointer text-left"
+        className="cursor-pointer text-left"
         onClick={() => {
           const openedLineList = globalGetLocalStorage("openedLineList");
           const updatedOpenedLineList = (() => {
@@ -48,16 +48,16 @@ export const InternalMainTitle: FunctionComponent<InternalMainTitleProps> = (pro
           setIsOpen(!isOpen);
         }}
       >
-        <h3 className={globalCn("text-xl font-bold", props.isDescription && "text-gray-600")}>
+        <h3 className={globalCn("text-lg font-bold", props.isDescription && "text-gray-600")}>
           {isOpen ? props.title : props.title.slice(0, MAX_TITLE_LENGTH) + "..."}
         </h3>
-        <p className="text-right text-sm text-gray-500">{isOpen ? "Show less" : "Show more"}</p>
+        <p className="text-right text-xs text-gray-500">{isOpen ? "Show less" : "Show more"}</p>
       </button>
     );
   }
   return (
     <div className="flex gap-2">
-      <h3 className={globalCn("mb-4 text-xl font-bold", props.isDescription && "text-gray-600")}>{props.title}</h3>
+      <h3 className={globalCn("text-lg font-bold", props.isDescription && "text-gray-600")}>{props.title}</h3>
     </div>
   );
 };

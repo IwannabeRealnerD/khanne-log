@@ -1,9 +1,8 @@
-import Link from "next/link";
-
 import { useTranslations } from "next-intl";
 
 import { GlobalTop } from "@/components/Top";
 import { GLOBAL_INTERNAL_URL } from "@/constants/internal-url";
+import { Link } from "@/i18n/navigation";
 
 const HomePage = () => {
   const t = useTranslations();
@@ -11,7 +10,7 @@ const HomePage = () => {
     <div>
       <GlobalTop>{t("main")}</GlobalTop>
       <nav className="flex flex-col items-center gap-5">
-        <Link href={GLOBAL_INTERNAL_URL.LINES}>Lines</Link>
+        <Link href={GLOBAL_INTERNAL_URL.LINES()}>Lines</Link>
         <p className="text-gray-400">Movies & Series(Not implemented yet)</p>
         <p className="text-gray-400">Games(Not implemented yet)</p>
       </nav>
