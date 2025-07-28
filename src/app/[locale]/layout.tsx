@@ -28,11 +28,11 @@ const RootLayout = async ({ children, params }: { children: React.ReactNode; par
     <html lang={locale}>
       <body className={inter.className}>
         <NextIntlClientProvider>
-          <header className="flex w-full items-center justify-between p-4">
+          <header className="flex w-full items-center justify-between p-3">
             <h1 className="pr-3 text-gray-400">Khanne Log</h1>
             <CountrySelect />
           </header>
-          <main className="p-5">
+          <main className="p-3">
             <div className="mx-auto max-w-screen-md">{children}</div>
           </main>
         </NextIntlClientProvider>
