@@ -24,7 +24,7 @@ import { reactRules } from "./lint/rules/react.js";
 import { typescriptRules } from "./lint/rules/typescript.js";
 
 const eslintConfig = defineConfig([
-  { ignores: [".vercel/", ".next/"] },
+  { ignores: [".vercel/", ".next/", "out/"] },
   {
     languageOptions: {
       parser: tseslint.parser,

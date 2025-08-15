@@ -1,10 +1,11 @@
 export const GLOBAL_INTERNAL_URL = {
   LINES: (pageIndex?: number) => {
-    if (!pageIndex) {
-      return "/lines";
+    if (pageIndex === undefined) {
+      return "/lines/1";
     }
-    return `/lines?page=${pageIndex}`;
+    return `/lines/${pageIndex}`;
   },
+  ROOT: "/",
   MOVIES_SERIES: "/movies-series",
   GAMES: "/games",
 };

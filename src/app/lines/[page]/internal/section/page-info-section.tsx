@@ -8,7 +8,7 @@ interface IsrInfoSectionProps {
   fetchedAt: string;
   dataLength: number;
 }
-export const PageInfoSection = (props: IsrInfoSectionProps) => {
+export const InternalPageInfoSection = (props: IsrInfoSectionProps) => {
   const [isIsrSectionOpened, setIsIsrSectionOpened] = useState(false);
 
   return (

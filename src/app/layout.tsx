@@ -1,16 +1,10 @@
 import React from "react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { notFound } from "next/navigation";
+import Link from "next/link";
 
-import { hasLocale, NextIntlClientProvider } from "next-intl";
-
-import { routing } from "@/i18n/routing";
-
-import { CountrySelect } from "../root-layout/CountrySelect";
-
-import "../../styles/app.css";
-
+import "../styles/app.css";
+import { GLOBAL_INTERNAL_URL } from "@/constants/internal-url";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -21,21 +15,17 @@ export const metadata: Metadata = {
 const RootLayout = async ({ children, params }: { children: React.ReactNode; params: Promise<{ locale: string }> }) => {
   const { locale } = await params;
 
-  if (!hasLocale(routing.locales, locale)) {
-    notFound();
-  }
   return (
     <html lang={locale}>
       <body className={inter.className}>
-        <NextIntlClientProvider>
-          <header className="flex w-full items-center justify-between p-3">
+        <header className="flex w-full items-center justify-between p-3">
+          <Link href={GLOBAL_INTERNAL_URL.ROOT}>
             <h1 className="pr-3 text-gray-400">Khanne Log</h1>
-            <CountrySelect />
-          </header>
-          <main className="p-3">
-            <div className="mx-auto max-w-screen-md">{children}</div>
-          </main>
-        </NextIntlClientProvider>
+          </Link>
+        </header>
+        <main className="p-3">
+          <div className="mx-auto max-w-screen-md">{children}</div>
+        </main>
       </body>
     </html>
   );

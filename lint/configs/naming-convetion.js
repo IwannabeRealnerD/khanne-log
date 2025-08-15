@@ -130,34 +130,4 @@ export const namingConventionConfigs = defineConfig([
       ],
     },
   },
-  {
-    files: ["src/app/**/page.tsx"],
-    plugins: { "@typescript-eslint": tseslint.plugin },
-    rules: {
-      "@typescript-eslint/naming-convention": [
-        "error",
-        {
-          format: ["StrictPascalCase"],
-          modifiers: ["exported"],
-          selector: ["function", "variable"],
-          suffix: ["Page"],
-        },
-      ],
-    },
-  },
-  {
-    files: ["src/app/**/layout.tsx"],
-    plugins: { "@typescript-eslint": tseslint.plugin },
-    rules: {
-      "@typescript-eslint/naming-convention": [
-        "error",
-        {
-          format: ["StrictPascalCase"],
-          modifiers: ["exported"],
-          selector: ["function", "variable"],
-          suffix: ["Layout", "metadata"],
-        },
-      ],
-    },
-  },
 ]);

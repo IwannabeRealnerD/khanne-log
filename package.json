@@ -17,15 +17,17 @@
   },
   "scripts": {
     "analyze": "ANALYZE=true pnpm build",
-    "build": "next build",
+    "deploy-prod": "npx vercel link --yes -p khanne-log && npx vercel pull && npx vercel build --prod && npx vercel deploy --prebuilt --prod",
     "dev": "next dev",
+    "build": "next build",
+    "generate-data": "pnpm dlx vite-node ./src/utils/globalMakeDataFromNotion/index.ts",
     "lint": "IS_COMMIT_CHECK=true eslint . --cache",
     "lint:analyze": "TIMING=1 IS_COMMIT_CHECK=true eslint .",
     "lint:inspect": "pnpm dlx @eslint/config-inspector@latest",
+    "start": "next start",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:parse": "pnpm dlx vite-node test/utils/parseTest.ts",
-    "start": "next start"
+    "test:parse": "pnpm dlx vite-node test/utils/parseTest.ts"
   },
   "devDependencies": {
     "@cspell/eslint-plugin": "^8.14.4",

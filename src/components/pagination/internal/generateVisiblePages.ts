@@ -1,29 +1,22 @@
+import { GLOBAL_ITEMS_PER_PAGE, GLOBAL_PAGINATION_MAX_VISIBLE_PAGES } from "@/constants/pagination";
+
 interface InternalRefinePaginationIndexesArgs {
-  itemsPerPage: number;
   currentPage: number;
-  totalDataCount: number;
+  totalPageCount: number;
 }
 
-const MAX_PAGE_TO_SHOW = 5;
-
-export const internalGenerateVisiblePages = ({
-  itemsPerPage,
-  currentPage,
-  totalDataCount,
-}: InternalRefinePaginationIndexesArgs) => {
-  const totalPages = Math.ceil(totalDataCount / itemsPerPage);
-
-  if (totalPages <= MAX_PAGE_TO_SHOW) {
-    return { pages: Array.from({ length: totalPages }, (_, index) => index + 1), firstPage: null, lastPage: null };
+export const internalGenerateVisiblePages = ({ currentPage, totalPageCount }: InternalRefinePaginationIndexesArgs) => {
+  if (totalPageCount <= GLOBAL_ITEMS_PER_PAGE) {
+    return { pages: Array.from({ length: totalPageCount }, (_, index) => index + 1), firstPage: null, lastPage: null };
   }
 
-  const pageOffset = Math.floor(MAX_PAGE_TO_SHOW / 2);
+  const pageOffset = Math.floor(GLOBAL_PAGINATION_MAX_VISIBLE_PAGES / 2);
   let startPage = Math.max(1, currentPage - pageOffset);
-  let endPage = startPage + MAX_PAGE_TO_SHOW - 1;
+  let endPage = startPage + GLOBAL_PAGINATION_MAX_VISIBLE_PAGES - 1;
 
-  if (endPage > totalPages) {
-    endPage = totalPages;
-    startPage = Math.max(1, endPage - MAX_PAGE_TO_SHOW + 1);
+  if (endPage > totalPageCount) {
+    endPage = totalPageCount;
+    startPage = Math.max(1, endPage - GLOBAL_PAGINATION_MAX_VISIBLE_PAGES + 1);
   }
 
   const pages = [];
@@ -38,8 +31,8 @@ export const internalGenerateVisiblePages = ({
   })();
 
   const lastPage = (() => {
-    if (!pages.includes(totalPages)) {
-      return totalPages;
+    if (!pages.includes(totalPageCount)) {
+      return totalPageCount;
     }
     return null;
   })();

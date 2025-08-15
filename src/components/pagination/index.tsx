@@ -1,29 +1,28 @@
 import { FunctionComponent } from "react";
+import Link from "next/link";
 
 import { GLOBAL_INTERNAL_URL } from "@/constants/internal-url";
-import { Link } from "@/i18n/navigation";
 import { globalCn } from "@/utils/globalCn";
 
 import { internalGenerateVisiblePages } from "./internal/generateVisiblePages";
 
 interface GlobalPaginationProps {
-  totalDataCount: number;
+  totalPageCount: number;
   currentPage: number;
 }
 
-const ITEMS_PER_PAGE = 3;
-
 export const GlobalPagination: FunctionComponent<GlobalPaginationProps> = (props) => {
   const pagesToShow = internalGenerateVisiblePages({
-    itemsPerPage: ITEMS_PER_PAGE,
     currentPage: props.currentPage,
-    totalDataCount: props.totalDataCount,
+    totalPageCount: props.totalPageCount,
   });
+
   return (
     <div className="my-5 flex justify-center gap-2">
       {pagesToShow.firstPage && (
         <div className="flex items-center gap-2">
           <Link
+            replace
             className="flex size-7 items-center justify-center rounded-md border-1 border-gray-200 text-sm"
             href={GLOBAL_INTERNAL_URL.LINES(pagesToShow.firstPage)}
           >
@@ -36,6 +35,7 @@ export const GlobalPagination: FunctionComponent<GlobalPaginationProps> = (props
         return (
           <Link
             key={page}
+            replace
             className={globalCn(
               "flex size-7 items-center justify-center rounded-md border-1 border-gray-200 text-sm",
               props.currentPage === page && "text-blue-500"
@@ -50,6 +50,7 @@ export const GlobalPagination: FunctionComponent<GlobalPaginationProps> = (props
         <div className="flex items-center gap-2">
           <p className="text-gray-400">...</p>
           <Link
+            replace
             className="flex size-7 items-center justify-center rounded-md border-1 border-gray-200 text-sm"
             href={GLOBAL_INTERNAL_URL.LINES(pagesToShow.lastPage)}
           >
