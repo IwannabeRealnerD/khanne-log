@@ -1,5 +1,5 @@
 import { GLOBAL_DATABASE_NAME } from "@/constants/databaseName";
-import { internalQueryNotionDatabase } from "@/utils/globalGetNotionDatabase/internal/getNotionDatabase";
+import { internalQueryNotionDatabase } from "@/utils/globalMakeDataFromNotion/internal/getNotionDatabase";
 
 (() => {
   internalQueryNotionDatabase(GLOBAL_DATABASE_NAME.LINES, {

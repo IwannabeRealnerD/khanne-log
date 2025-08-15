@@ -1,5 +1,4 @@
 import bundleAnalyzer from "@next/bundle-analyzer";
-import createNextIntlPlugin from "next-intl/plugin";
 
 const withBundleAnalyzer = bundleAnalyzer({ enabled: process.env.ANALYZE === "true" });
 
@@ -12,6 +11,7 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  output: "export",
   webpack: (config) => {
     config.module.rules.push({
       test: /\.md$/,
@@ -25,6 +25,5 @@ const nextConfig = {
     },
   },
 };
-const withNextIntl = createNextIntlPlugin();
 
-export default withBundleAnalyzer(withNextIntl(nextConfig));
+export default withBundleAnalyzer(nextConfig);

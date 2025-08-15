@@ -5,7 +5,7 @@ interface InternalTitleSectionProps {
   scene_description: string;
   id: string;
 }
-export const TitleSection = (props: InternalTitleSectionProps) => {
+export const InternalTitleSection = (props: InternalTitleSectionProps) => {
   const refinedTitles = (() => {
     if (!props.quote && props.scene_description) {
       return {
