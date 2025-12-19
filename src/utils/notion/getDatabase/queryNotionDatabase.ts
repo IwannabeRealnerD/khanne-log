@@ -4,7 +4,7 @@ import { QueryDatabaseResponse } from "@notionhq/client/build/src/api-endpoints"
 
 import { GlobalQueryBody } from "@/types/QueryBody";
 
-export async function internalQueryNotionDatabase(databaseName: "LINES", queryBody?: GlobalQueryBody) {
+export async function queryNotionDatabase(databaseName: "LINES", queryBody?: GlobalQueryBody) {
   const databaseId = process.env[`NOTION_${databaseName}_DATABASE_ID`];
   const integrationToken = process.env.NOTION_API_KEY;
 
@@ -22,8 +22,7 @@ export async function internalQueryNotionDatabase(databaseName: "LINES", queryBo
       "Notion-Version": "2022-06-28",
     },
     next: {
-      // FIXME - Should find reasonable cache time
-      revalidate: 30,
+      revalidate: 60 * 60 * 24,
     },
     body: queryBody ? JSON.stringify(queryBody) : undefined,
   });
