@@ -12,11 +12,7 @@ import {
   globalGetTitle,
 } from "@/utils/notion/propertyType";
 
-<<<<<<< HEAD
 import { queryNotionDatabase } from "./queryNotionDatabase";
-=======
-import { internalQueryNotionDatabase } from "./internal/queryNotionDatabase";
->>>>>>> 3df3b94 (change env)
 
 type LineData = {
   id: string;
@@ -41,11 +37,7 @@ export async function globalGetDatabase(
   if (!databaseName) {
     throw new Error("Database name is required");
   }
-<<<<<<< HEAD
   const response = await queryNotionDatabase(databaseName, queryBody);
-=======
-  const response = await internalQueryNotionDatabase(databaseName, queryBody);
->>>>>>> 3df3b94 (change env)
   if (response.results === undefined || response.results.length === 0) {
     return undefined;
   }
