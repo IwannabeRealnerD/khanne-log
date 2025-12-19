@@ -21,7 +21,6 @@
     "deploy-prod": "npx vercel link --yes -p khanne-log && npx vercel pull && npx vercel build --prod && npx vercel deploy --prebuilt --prod",
     "dev": "next dev",
     "build": "next build",
-    "generate-data": "pnpm dlx vite-node ./src/utils/globalMakeDataFromNotion/index.ts",
     "lint": "IS_COMMIT_CHECK=true eslint . --cache",
     "lint:analyze": "TIMING=1 IS_COMMIT_CHECK=true eslint .",
     "lint:inspect": "pnpm dlx @eslint/config-inspector@latest",
