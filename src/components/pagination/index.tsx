@@ -4,7 +4,11 @@ import Link from "next/link";
 import { GLOBAL_INTERNAL_URL } from "@/constants/internal-url";
 import { globalCn } from "@/utils/globalCn";
 
+<<<<<<< HEAD
 import { internalGenerateVisiblePages } from "./internal/generateVisiblePages";
+=======
+import { generateVisiblePages } from "./utils/generateVisiblePages";
+>>>>>>> ddde6fb (feat/better-ssr)
 
 interface GlobalPaginationProps {
   totalPageCount: number;
@@ -12,7 +16,11 @@ interface GlobalPaginationProps {
 }
 
 export const GlobalPagination: FunctionComponent<GlobalPaginationProps> = (props) => {
+<<<<<<< HEAD
   const pagesToShow = internalGenerateVisiblePages({
+=======
+  const pagesToShow = generateVisiblePages({
+>>>>>>> ddde6fb (feat/better-ssr)
     currentPage: props.currentPage,
     totalPageCount: props.totalPageCount,
   });
