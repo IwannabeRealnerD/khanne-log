@@ -2,7 +2,7 @@ import { Suspense } from "react";
 
 import { GlobalTop } from "@/components/Top";
 
-import { LineListSectionSkeleton } from "./components/Sekeleton";
+import { LineListSectionSkeleton } from "./components/LineListSectionSkeleton";
 
 const LinesLayout = (props: LayoutProps<"/lines">) => {
   return (
