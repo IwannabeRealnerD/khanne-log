@@ -23,6 +23,7 @@
     "build": "next build",
     "lint": "IS_COMMIT_CHECK=true eslint . --cache",
     "lint:analyze": "TIMING=1 IS_COMMIT_CHECK=true eslint .",
+    "typegen": "next typegen",
     "lint:inspect": "pnpm dlx @eslint/config-inspector@latest",
     "start": "next start",
     "test": "vitest run",

@@ -4,7 +4,7 @@ import { RiMovieLine } from "react-icons/ri";
 import { SiAppletv, SiHbo, SiNetflix } from "react-icons/si";
 import { TbBrandDisney } from "react-icons/tb";
 
-import { GlobalOttServiceName } from "@/app/[locale]/lines/components/line-list-section/ott-badge/ott-service";
+import { GlobalOttServiceName } from "./ott-service";
 
 interface OttBadgeProps {
   ottName: GlobalOttServiceName | string | null;

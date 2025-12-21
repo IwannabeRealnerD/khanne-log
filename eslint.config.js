@@ -74,6 +74,7 @@ const eslintConfig = defineConfig([
           configFile: new URL("./cspell.json", import.meta.url).toString(),
         },
       ],
+      "no-undef": "off",
       ...typescriptRules,
       ...importRules,
       ...reactRules,

@@ -1,15 +1,18 @@
 import Link from "next/link";
 
+import { GlobalTop } from "@/components/Top";
 import { GLOBAL_INTERNAL_URL } from "@/constants/internal-url";
 
 const HomePage = () => {
   return (
-    <div className="mt-10 flex flex-col items-center gap-2">
-      <Link className="underline" href={GLOBAL_INTERNAL_URL.LINES()}>
-        Lines
-      </Link>
+    <div>
+      <GlobalTop>Main</GlobalTop>
+      <nav className="flex flex-col items-center gap-5">
+        <Link href={GLOBAL_INTERNAL_URL.LINES()}>Lines</Link>
+        <p className="text-gray-400">Movies & Series(Not implemented yet)</p>
+        <p className="text-gray-400">Games(Not implemented yet)</p>
+      </nav>
     </div>
   );
 };
-
 export default HomePage;
