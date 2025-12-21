@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 
 export const LineListSectionSkeleton: FunctionComponent = () => {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="mt-4 flex flex-col gap-2">
       <div className="flex flex-col gap-6">
         <SkeletonItem1 />
         <SkeletonItem2 />
