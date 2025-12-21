@@ -1,15 +1,12 @@
 import { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
   reactStrictMode: true,
   typescript: {
     ignoreBuildErrors: true,
   },
+  typedRoutes: true,
   cacheComponents: true,
-
   logging: {
     fetches: {
       fullUrl: true,

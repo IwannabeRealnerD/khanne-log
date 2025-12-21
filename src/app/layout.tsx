@@ -1,10 +1,8 @@
-import React from "react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Link from "next/link";
 
 import "../styles/app.css";
-import { GLOBAL_INTERNAL_URL } from "@/constants/internal-url";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -17,7 +15,7 @@ const RootLayout = async (props: LayoutProps<"/">) => {
     <html lang="ko">
       <body className={inter.className}>
         <header className="flex w-full items-center justify-between p-3">
-          <Link href={GLOBAL_INTERNAL_URL.ROOT}>
+          <Link href="/">
             <h1 className="pr-3 text-gray-400">Khanne Log</h1>
           </Link>
         </header>

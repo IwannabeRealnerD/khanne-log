@@ -1,5 +1,3 @@
-"use server";
-
 import { GlobalDatabaseName } from "@/types/DatabaseName";
 import { GlobalLine } from "@/types/DatabaseScheme";
 
