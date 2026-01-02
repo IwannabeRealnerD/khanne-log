@@ -1,8 +1,26 @@
+import { GlobalLineResponse } from "@/types/database-response";
 import { GlobalDatabaseName } from "@/types/DatabaseName";
 import { GlobalLine } from "@/types/DatabaseScheme";
 
-import { queryNotionDatabase } from "./getNotionDatabase";
+import { getDataUntilDone } from "./getDataUntilDone";
 import { QueryDatabaseParameters } from "./QueryBody";
+
+async function queryNotionDatabase(
+  databaseName: GlobalDatabaseName,
+  queryBody: QueryDatabaseParameters
+): Promise<GlobalLineResponse | undefined> {
+  if (!databaseName) {
+    throw new Error("Database name is required");
+  }
+  const fetchedAt = new Date().toISOString();
+
+  const results = await getDataUntilDone(databaseName, queryBody);
+
+  return {
+    fetchedAt,
+    data: results,
+  };
+}
 
 export function globalGetDatabase(
   databaseName: "LINES",
