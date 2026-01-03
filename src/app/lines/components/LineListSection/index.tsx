@@ -1,4 +1,5 @@
 import { GlobalPagination } from "@/components/pagination";
+import { GLOBAL_DATABASE_NAME } from "@/constants/databaseName";
 import { GLOBAL_ITEMS_PER_PAGE } from "@/constants/pagination";
 import { globalGetDatabase } from "@/utils/notion/getDatabase";
 
@@ -10,7 +11,7 @@ import { Title } from "./Title";
 export const LineListSection = async (props: { currentPage: number }) => {
   const itemsPerPage = GLOBAL_ITEMS_PER_PAGE;
 
-  const database = await globalGetDatabase("LINES", {
+  const database = await globalGetDatabase(GLOBAL_DATABASE_NAME.LINES, {
     filter: {
       property: "is_done",
       checkbox: {

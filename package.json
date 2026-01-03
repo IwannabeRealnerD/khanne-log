@@ -18,7 +18,7 @@
   "scripts": {
     "analyze": "ANALYZE=true pnpm build",
     "deploy-prod": "npx vercel link --yes -p khanne-log && npx vercel pull && npx vercel build --prod && npx vercel deploy --prebuilt --prod",
-    "dev": "next dev",
+    "dev": "NEXT_PRIVATE_DEBUG_CACHE=1 next dev",
     "build": "next build",
     "lint": "IS_COMMIT_CHECK=true eslint . --cache",
     "lint:analyze": "TIMING=1 IS_COMMIT_CHECK=true eslint .",
