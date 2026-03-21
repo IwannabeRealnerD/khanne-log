@@ -37,27 +37,42 @@ export const LineListSection = async (props: { currentPage: number }) => {
 
   return (
     <div className="flex flex-col gap-2">
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-6">
         {pageData.map((item) => {
           return (
-            <article key={`${item.id}`}>
-              <p className="text-right text-xs text-gray-400">
-                {item.added_date ? new Date(item.added_date).toLocaleDateString("ko") : ""}
-              </p>
-              <div className="rounded-xl border border-gray-300 p-3">
-                <Title id={item.id} quote={item.quote} scene_description={item.scene_description} />
-                <div className="mb-5 flex flex-col justify-between gap-2 border-b border-dashed border-gray-200 pb-2">
-                  <div className="flex items-center justify-between">
-                    <div className="flex flex-col justify-between">
-                      <p className="text-base font-semibold">{item.title}</p>
-                      <span className="text-sm font-normal">{item.when}</span>
-                    </div>
+            <article
+              key={`${item.id}`}
+              className="rounded-lg border border-border bg-surface shadow-sm transition-shadow hover:shadow-md"
+            >
+              {/* Header: 작품 메타 정보 */}
+              <div className="flex items-start justify-between gap-3 px-4 pt-4 pb-3">
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center gap-2">
+                    <h3 className="text-body font-semibold text-fg">{item.title}</h3>
                     <OttBadge ottName={item.from} />
                   </div>
-                  <KeyPoints keyPoints={item.key_points} />
+                  <div className="mt-0.5 flex items-center gap-1.5 text-caption text-muted">
+                    {item.when && <span>{item.when}</span>}
+                    {item.when && item.key_points.length > 0 && <span>·</span>}
+                    <KeyPoints keyPoints={item.key_points} />
+                  </div>
                 </div>
-                <Comment comment={item.comment} id={item.id} />
+                <span className="shrink-0 text-caption text-subtle">
+                  {item.added_date ? new Date(item.added_date).toLocaleDateString("ko") : ""}
+                </span>
               </div>
+
+              {/* Body: 인용문 (메인 콘텐츠) */}
+              <div className="border-t border-border bg-bg-subtle px-4 py-4">
+                <Title id={item.id} quote={item.quote} scene_description={item.scene_description} />
+              </div>
+
+              {/* Footer: 코멘트 */}
+              {item.comment && (
+                <div className="border-t border-border px-4 py-3">
+                  <Comment comment={item.comment} id={item.id} />
+                </div>
+              )}
             </article>
           );
         })}

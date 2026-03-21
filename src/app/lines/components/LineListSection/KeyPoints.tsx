@@ -4,5 +4,6 @@ interface KeyPointsProps {
   keyPoints: string[];
 }
 export const KeyPoints: FunctionComponent<KeyPointsProps> = (props) => {
-  return <p className="text-xs">{props.keyPoints.join(" / ")}</p>;
+  if (props.keyPoints.length === 0) return null;
+  return <span>{props.keyPoints.join(" / ")}</span>;
 };

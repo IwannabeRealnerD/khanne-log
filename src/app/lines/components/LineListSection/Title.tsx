@@ -33,41 +33,45 @@ export const Title: FunctionComponent<TitleProps> = (props) => {
     isInitialRender.current = false;
   }
 
-  const renderMainTitle = () => {
-    if (isTitleTooLong) {
-      return (
-        <button
-          className="cursor-pointer text-left"
-          onClick={() => {
-            const openedLineList = globalGetLocalStorage("openedLineList");
-            const updatedOpenedLineList = (() => {
-              if (isOpen) {
-                return openedLineList?.filter((id) => id !== props.id) ?? [];
-              }
-              return [...(openedLineList?.filter((id) => id !== props.id) ?? []), props.id];
-            })();
-            globalSetLocalStorage("openedLineList", updatedOpenedLineList);
-            setIsOpen(!isOpen);
-          }}
-        >
-          <h3 className={globalCn("text-lg font-bold", isDescription && "text-gray-600")}>
-            {isOpen ? mainTitle : mainTitle.slice(0, MAX_TITLE_LENGTH) + "..."}
-          </h3>
-          <p className="text-right text-xs text-gray-500">{isOpen ? "Show less" : "Show more"}</p>
-        </button>
-      );
-    }
-    return (
-      <div className="flex gap-2">
-        <h3 className={globalCn("text-lg font-bold", isDescription && "text-gray-600")}>{mainTitle}</h3>
-      </div>
-    );
+  const toggleOpen = () => {
+    const openedLineList = globalGetLocalStorage("openedLineList");
+    const updatedOpenedLineList = (() => {
+      if (isOpen) {
+        return openedLineList?.filter((id) => id !== props.id) ?? [];
+      }
+      return [...(openedLineList?.filter((id) => id !== props.id) ?? []), props.id];
+    })();
+    globalSetLocalStorage("openedLineList", updatedOpenedLineList);
+    setIsOpen(!isOpen);
   };
 
+  const quoteText = isTitleTooLong && !isOpen ? mainTitle.slice(0, MAX_TITLE_LENGTH) + "..." : mainTitle;
+
   return (
-    <div className="mb-3 flex flex-col gap-1 border-b border-dashed border-gray-200 pb-2">
-      {renderMainTitle()}
-      {props.scene_description && props.quote && <p className="text-base">{props.scene_description}</p>}
+    <div className="flex flex-col gap-2">
+      {isTitleTooLong ? (
+        <button className="cursor-pointer text-left" onClick={toggleOpen}>
+          <p
+            className={globalCn(
+              "text-base leading-relaxed font-medium text-fg md:text-h3 md:leading-h3",
+              isDescription && "text-muted italic"
+            )}
+          >
+            {quoteText}
+          </p>
+          <p className="mt-1 text-caption text-accent">{isOpen ? "접기" : "더 보기"}</p>
+        </button>
+      ) : (
+        <p
+          className={globalCn(
+            "text-base leading-relaxed font-medium text-fg md:text-h3 md:leading-h3",
+            isDescription && "text-muted italic"
+          )}
+        >
+          {mainTitle}
+        </p>
+      )}
+      {props.scene_description && props.quote && <p className="text-body text-muted">{props.scene_description}</p>}
     </div>
   );
 };

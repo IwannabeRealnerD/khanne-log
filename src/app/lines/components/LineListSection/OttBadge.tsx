@@ -17,16 +17,16 @@ export const OttBadge: FunctionComponent<OttBadgeProps> = (props) => {
 
   switch (props.ottName) {
     case "HBO max":
-      return <SiHbo className="text-2xl" />;
+      return <SiHbo className="text-base text-muted" />;
     case "Netflix":
-      return <SiNetflix className="text-2xl text-red-500" />;
+      return <SiNetflix className="text-base text-red-500" />;
     case "Apple TV+":
-      return <SiAppletv className="text-2xl" />;
+      return <SiAppletv className="text-base text-muted" />;
     case "Disney Plus":
-      return <TbBrandDisney className="text-2xl text-teal-400" />;
+      return <TbBrandDisney className="text-base text-teal-400" />;
     case "Movie":
-      return <RiMovieLine className="text-2xl" />;
+      return <RiMovieLine className="text-base text-muted" />;
     default:
-      return <span>{props.ottName}</span>;
+      return <span className="text-caption text-muted">{props.ottName}</span>;
   }
 };

@@ -17,17 +17,17 @@ export const GlobalPagination: FunctionComponent<GlobalPaginationProps> = (props
   });
 
   return (
-    <div className="my-5 flex justify-center gap-2">
+    <div className="mt-8 mb-5 flex justify-center gap-2">
       {pagesToShow.firstPage && (
         <div className="flex items-center gap-2">
           <Link
             replace
-            className="flex size-7 items-center justify-center rounded-md border-1 border-gray-200 text-sm"
+            className="flex size-7 items-center justify-center rounded-md border border-border text-body"
             href={`/lines?page=${pagesToShow.firstPage}`}
           >
             {pagesToShow.firstPage}
           </Link>
-          <p className="align-middle text-gray-400">...</p>
+          <p className="align-middle text-subtle">...</p>
         </div>
       )}
       {pagesToShow.pages.map((page) => {
@@ -36,8 +36,8 @@ export const GlobalPagination: FunctionComponent<GlobalPaginationProps> = (props
             key={page}
             replace
             className={globalCn(
-              "flex size-7 items-center justify-center rounded-md border-1 border-gray-200 text-sm",
-              props.currentPage === page && "text-blue-500"
+              "flex size-7 items-center justify-center rounded-md border border-border text-body",
+              props.currentPage === page && "border-border-accent bg-bg-accent text-accent font-medium"
             )}
             href={`/lines?page=${page}`}
           >
@@ -47,10 +47,10 @@ export const GlobalPagination: FunctionComponent<GlobalPaginationProps> = (props
       })}
       {pagesToShow.lastPage && (
         <div className="flex items-center gap-2">
-          <p className="text-gray-400">...</p>
+          <p className="text-subtle">...</p>
           <Link
             replace
-            className="flex size-7 items-center justify-center rounded-md border-1 border-gray-200 text-sm"
+            className="flex size-7 items-center justify-center rounded-md border border-border text-body"
             href={`/lines?page=${pagesToShow.lastPage}`}
           >
             {pagesToShow.lastPage}

@@ -2,58 +2,47 @@ import { FunctionComponent } from "react";
 
 export const LineListSectionSkeleton: FunctionComponent = () => {
   return (
-    <div className="mt-4 flex flex-col gap-2">
-      <div className="flex flex-col gap-6">
-        <SkeletonItem1 />
-        <SkeletonItem2 />
-        <SkeletonItem3 />
+    <div className="flex flex-col gap-6">
+      <SkeletonCard lines={5} />
+      <SkeletonCard lines={8} />
+      <SkeletonCard lines={3} />
+    </div>
+  );
+};
+
+const SkeletonCard = ({ lines }: { lines: number }) => {
+  return (
+    <div className="rounded-lg border border-border shadow-sm">
+      {/* Header */}
+      <div className="px-4 pt-4 pb-3">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="h-4 w-32 animate-pulse rounded bg-bg-muted" />
+            <div className="h-4 w-4 animate-pulse rounded bg-bg-subtle" />
+          </div>
+          <div className="h-3 w-16 animate-pulse rounded bg-bg-subtle" />
+        </div>
+        <div className="mt-1.5 h-3 w-40 animate-pulse rounded bg-bg-subtle" />
       </div>
-    </div>
-  );
-};
-
-const SkeletonItem1 = () => {
-  return (
-    <div className="flex h-100 flex-col gap-3 rounded-xl border border-gray-300 p-3">
-      <div className="h-6 w-3/4 animate-pulse rounded bg-gray-200" />
-      <div className="h-4 w-1/2 animate-pulse rounded bg-gray-100" />
-      <div className="h-4 w-full animate-pulse rounded bg-gray-100" />
-      <div className="h-4 w-5/6 animate-pulse rounded bg-gray-100" />
-      <div className="h-4 w-1/2 animate-pulse rounded bg-gray-100" />
-      <div className="h-4 w-1/3 animate-pulse rounded bg-gray-100" />
-      <div className="h-4 w-1/2 animate-pulse rounded bg-gray-100" />
-      <div className="h-4 w-1/4 animate-pulse rounded bg-gray-100" />
-      <div className="h-4 w-full animate-pulse rounded bg-gray-100" />
-      <div className="h-4 w-5/6 animate-pulse rounded bg-gray-100" />
-      <div className="h-4 w-2/6 animate-pulse rounded bg-gray-100" />
-      <div className="h-4 w-full animate-pulse rounded bg-gray-100" />
-      <div className="h-4 w-2/3 animate-pulse rounded bg-gray-100" />
-    </div>
-  );
-};
-
-const SkeletonItem2 = () => {
-  return (
-    <div className="flex h-60 flex-col gap-3 rounded-xl border border-gray-300 p-3">
-      <div className="h-6 w-3/4 animate-pulse rounded bg-gray-200" />
-      <div className="h-4 w-full animate-pulse rounded bg-gray-100" />
-      <div className="h-4 w-3/4 animate-pulse rounded bg-gray-100" />
-      <div className="h-4 w-1/6 animate-pulse rounded bg-gray-100" />
-      <div className="h-4 w-1/4 animate-pulse rounded bg-gray-100" />
-      <div className="h-4 w-full animate-pulse rounded bg-gray-100" />
-      <div className="h-4 w-5/6 animate-pulse rounded bg-gray-100" />
-      <div className="h-4 w-2/5 animate-pulse rounded bg-gray-100" />
-    </div>
-  );
-};
-
-const SkeletonItem3 = () => {
-  return (
-    <div className="flex h-40 flex-col gap-3 rounded-xl border border-gray-300 p-3">
-      <div className="h-6 w-3/4 animate-pulse rounded bg-gray-200" />
-      <div className="h-4 w-1/2 animate-pulse rounded bg-gray-100" />
-      <div className="h-4 w-full animate-pulse rounded bg-gray-100" />
-      <div className="h-4 w-5/6 animate-pulse rounded bg-gray-100" />
+      {/* Body */}
+      <div className="border-t border-border bg-bg-subtle px-4 py-4">
+        <div className="flex flex-col gap-2">
+          {Array.from({ length: lines }).map((_, i) => (
+            <div
+              key={i}
+              className="h-5 animate-pulse rounded bg-bg-muted"
+              style={{ width: `${60 + Math.random() * 40}%` }}
+            />
+          ))}
+        </div>
+      </div>
+      {/* Footer */}
+      <div className="border-t border-border px-4 py-3">
+        <div className="flex flex-col gap-1.5">
+          <div className="h-3.5 w-full animate-pulse rounded bg-bg-subtle" />
+          <div className="h-3.5 w-3/4 animate-pulse rounded bg-bg-subtle" />
+        </div>
+      </div>
     </div>
   );
 };
