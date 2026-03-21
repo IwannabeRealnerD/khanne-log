@@ -1,9 +1,9 @@
 import { FunctionComponent } from "react";
 import Link from "next/link";
 
-import { globalCn } from "@/utils/globalCn";
+import { globalCn } from "@/utils/global-cn";
 
-import { generateVisiblePages } from "./generateVisiblePages";
+import { generateVisiblePages } from "./generate-visible-pages";
 
 interface GlobalPaginationProps {
   totalPageCount: number;

@@ -1,12 +1,12 @@
 import { GlobalPagination } from "@/components/pagination";
-import { GLOBAL_DATABASE_NAME } from "@/constants/databaseName";
+import { GLOBAL_DATABASE_NAME } from "@/constants/database-name";
 import { GLOBAL_ITEMS_PER_PAGE } from "@/constants/pagination";
-import { globalGetDatabase } from "@/utils/notion/getDatabase";
+import { globalGetDatabase } from "@/utils/notion/get-database";
 
-import { Comment } from "./Comment";
-import { KeyPoints } from "./KeyPoints";
-import { OttBadge } from "./OttBadge";
-import { Title } from "./Title";
+import { Comment } from "./comment";
+import { KeyPoints } from "./key-points";
+import { OttBadge } from "./ott-badge";
+import { Title } from "./title";
 
 export const LineListSection = async (props: { currentPage: number }) => {
   const itemsPerPage = GLOBAL_ITEMS_PER_PAGE;

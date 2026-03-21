@@ -1,4 +1,4 @@
-import { GlobalLine } from "./DatabaseScheme";
+import { GlobalLine } from "./database-scheme";
 
 export interface GlobalLineResponse {
   fetchedAt: string;

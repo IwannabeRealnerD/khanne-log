@@ -1,6 +1,6 @@
 import { object, string, array, nullable, boolean, InferInput } from "valibot";
 
-import { GlobalOttServiceNameSchema } from "@/types/OttServiceName";
+import { GlobalOttServiceNameSchema } from "@/types/ott-service-name";
 
 export const GlobalLineScheme = object({
   id: string(),

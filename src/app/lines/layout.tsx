@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 
-import { GlobalTop } from "@/components/Top";
+import { GlobalTop } from "@/components/top";
 
 const LinesLayout = async (props: LayoutProps<"/lines">) => {
   return (
