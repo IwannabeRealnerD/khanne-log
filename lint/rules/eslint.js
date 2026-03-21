@@ -7,5 +7,6 @@ export const eslintRules = {
   "arrow-body-style": "off",
   "no-redeclare": "off",
   "no-console": "warn",
+  "no-undef": "off",
   curly: "error",
 };

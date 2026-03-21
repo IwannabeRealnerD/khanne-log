@@ -1,3 +1,5 @@
+"use server";
+
 import { Client, isFullPage } from "@notionhq/client";
 import { QueryDatabaseResponse } from "@notionhq/client/build/src/api-endpoints";
 import { pick, safeParse } from "valibot";
@@ -6,19 +8,12 @@ import { GlobalDatabaseName } from "@/types/DatabaseName";
 import { GlobalLine, GlobalLineScheme } from "@/types/DatabaseScheme";
 import { GlobalOttServiceNameSchema } from "@/types/OttServiceName";
 
-import {
-  internalGetCheckbox,
-  internalGetCreatedTime,
-  internalGetMultiSelect,
-  internalGetRichText,
-  internalGetSelectAsEnum,
-  internalGetTitle,
-} from "./propertyType";
-import { InternalQueryDatabaseParameters } from "./QueryBody";
+import { getCheckbox, getCreatedTime, getMultiSelect, getRichText, getSelectAsEnum, getTitle } from "./propertyType";
+import { QueryDatabaseParameters } from "./QueryBody";
 
-export const internalGetDataUntilDone = async (
+export const getDataUntilDone = async (
   databaseName: GlobalDatabaseName,
-  queryBody: InternalQueryDatabaseParameters,
+  queryBody: QueryDatabaseParameters,
   prevResults?: GlobalLine[],
   nextCursor?: string
 ): Promise<GlobalLine[]> => {
@@ -54,21 +49,21 @@ export const internalGetDataUntilDone = async (
       if (databaseName === "LINES") {
         const refinedLineItem = {
           id: result.id,
-          title: internalGetTitle(result.properties.title, pick(GlobalLineScheme, ["title"]).entries.title),
-          quote: internalGetRichText(result.properties.quote, pick(GlobalLineScheme, ["quote"]).entries.quote),
-          from: internalGetSelectAsEnum(result.properties.from, GlobalOttServiceNameSchema),
-          scene_description: internalGetRichText(
+          title: getTitle(result.properties.title, pick(GlobalLineScheme, ["title"]).entries.title),
+          quote: getRichText(result.properties.quote, pick(GlobalLineScheme, ["quote"]).entries.quote),
+          from: getSelectAsEnum(result.properties.from, GlobalOttServiceNameSchema),
+          scene_description: getRichText(
             result.properties.scene_description,
             pick(GlobalLineScheme, ["scene_description"]).entries.scene_description
           ),
-          key_points: internalGetMultiSelect(result.properties.key_points),
-          comment: internalGetRichText(result.properties.comment, pick(GlobalLineScheme, ["comment"]).entries.comment),
-          when: internalGetRichText(result.properties.when, pick(GlobalLineScheme, ["when"]).entries.when),
-          added_date: internalGetCreatedTime(
+          key_points: getMultiSelect(result.properties.key_points),
+          comment: getRichText(result.properties.comment, pick(GlobalLineScheme, ["comment"]).entries.comment),
+          when: getRichText(result.properties.when, pick(GlobalLineScheme, ["when"]).entries.when),
+          added_date: getCreatedTime(
             result.properties.added_date,
             pick(GlobalLineScheme, ["added_date"]).entries.added_date
           ),
-          is_spoiler: internalGetCheckbox(
+          is_spoiler: getCheckbox(
             result.properties.is_spoiler,
             pick(GlobalLineScheme, ["is_spoiler"]).entries.is_spoiler
           ),
@@ -82,7 +77,7 @@ export const internalGetDataUntilDone = async (
     });
   }
   if (response.has_more && response.next_cursor) {
-    return internalGetDataUntilDone(databaseName, queryBody, copiedTempResults, response.next_cursor);
+    return getDataUntilDone(databaseName, queryBody, copiedTempResults, response.next_cursor);
   }
   return copiedTempResults;
 };

@@ -1,9 +1,10 @@
 import type { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
-import { BaseSchema, parse } from "valibot";
+import { parse } from "valibot";
+import type { BaseSchema } from "valibot";
 
 type NotionProperty = PageObjectResponse["properties"][string];
 
-export const internalGetTitle = (property: NotionProperty, schema: BaseSchema<any, any, any>): string => {
+export const getTitle = (property: NotionProperty, schema: BaseSchema<any, any, any>): string => {
   if (property.type !== "title") {
     throw new Error("Property is not a title");
   }
@@ -11,7 +12,7 @@ export const internalGetTitle = (property: NotionProperty, schema: BaseSchema<an
   return parsed;
 };
 
-export const internalGetRichText = (property: NotionProperty, schema: BaseSchema<any, any, any>): string => {
+export const getRichText = (property: NotionProperty, schema: BaseSchema<any, any, any>): string => {
   if (property.type !== "rich_text") {
     throw new Error("Property is not a rich text");
   }
@@ -20,7 +21,7 @@ export const internalGetRichText = (property: NotionProperty, schema: BaseSchema
   return parsed;
 };
 
-export const internalGetSelectAsEnum = <T extends BaseSchema<any, any, any>>(
+export const getSelectAsEnum = <T extends BaseSchema<any, any, any>>(
   property: NotionProperty,
   schema: T
 ): Partial<T> | null => {
@@ -30,14 +31,15 @@ export const internalGetSelectAsEnum = <T extends BaseSchema<any, any, any>>(
   const parsed = parse(schema, property.select?.name);
   return parsed;
 };
-export const internalGetMultiSelect = (property: NotionProperty): string[] => {
+
+export const getMultiSelect = (property: NotionProperty): string[] => {
   if (property.type === "multi_select") {
     return property.multi_select.map((item: { name: string }) => item.name);
   }
   return [];
 };
 
-export const internalGetCreatedTime = (property: NotionProperty, schema: BaseSchema<any, any, any>): string => {
+export const getCreatedTime = (property: NotionProperty, schema: BaseSchema<any, any, any>): string => {
   if (property.type !== "created_time") {
     throw new Error("Property is not a created time");
   }
@@ -45,7 +47,7 @@ export const internalGetCreatedTime = (property: NotionProperty, schema: BaseSch
   return parsed;
 };
 
-export const internalGetCheckbox = (property: NotionProperty, schema: BaseSchema<any, any, any>): boolean => {
+export const getCheckbox = (property: NotionProperty, schema: BaseSchema<any, any, any>): boolean => {
   if (property.type !== "checkbox") {
     throw new Error("Property is not a checkbox");
   }
