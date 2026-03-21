@@ -4,12 +4,12 @@ import { Client, isFullPage } from "@notionhq/client";
 import { QueryDatabaseResponse } from "@notionhq/client/build/src/api-endpoints";
 import { pick, safeParse } from "valibot";
 
-import { GlobalDatabaseName } from "@/types/DatabaseName";
-import { GlobalLine, GlobalLineScheme } from "@/types/DatabaseScheme";
-import { GlobalOttServiceNameSchema } from "@/types/OttServiceName";
+import { GlobalDatabaseName } from "@/types/database-name";
+import { GlobalLine, GlobalLineScheme } from "@/types/database-scheme";
+import { GlobalOttServiceNameSchema } from "@/types/ott-service-name";
 
-import { getCheckbox, getCreatedTime, getMultiSelect, getRichText, getSelectAsEnum, getTitle } from "./propertyType";
-import { QueryDatabaseParameters } from "./QueryBody";
+import { getCheckbox, getCreatedTime, getMultiSelect, getRichText, getSelectAsEnum, getTitle } from "./property-type";
+import { QueryDatabaseParameters } from "./query-body";
 
 export const getDataUntilDone = async (
   databaseName: GlobalDatabaseName,

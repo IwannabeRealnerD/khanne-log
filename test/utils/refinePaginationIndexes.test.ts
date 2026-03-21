@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 
-import { generateVisiblePages } from "@/components/pagination/generateVisiblePages";
+import { generateVisiblePages } from "@/components/pagination/generate-visible-pages";
 
 describe("generateVisiblePages", () => {
   describe("when total pages are less than or equal to the max display pages", () => {

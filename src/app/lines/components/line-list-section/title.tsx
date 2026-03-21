@@ -2,8 +2,8 @@
 
 import { FunctionComponent, useEffect, useRef, useState } from "react";
 
-import { globalCn } from "@/utils/globalCn";
-import { globalGetLocalStorage, globalSetLocalStorage } from "@/utils/globalLocalStorage";
+import { globalCn } from "@/utils/global-cn";
+import { globalGetLocalStorage, globalSetLocalStorage } from "@/utils/global-local-storage";
 
 interface TitleProps {
   quote: string | null;

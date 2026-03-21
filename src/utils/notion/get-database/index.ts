@@ -1,10 +1,10 @@
 import { cacheLife } from "next/cache";
 
-import { GlobalDatabaseName } from "@/types/DatabaseName";
-import { GlobalLine } from "@/types/DatabaseScheme";
+import { GlobalDatabaseName } from "@/types/database-name";
+import { GlobalLine } from "@/types/database-scheme";
 
-import { getDataUntilDone } from "./getDataUntilDone";
-import { QueryDatabaseParameters } from "./QueryBody";
+import { getDataUntilDone } from "./get-data-until-done";
+import { QueryDatabaseParameters } from "./query-body";
 
 export async function globalGetDatabase(
   databaseName: GlobalDatabaseName,

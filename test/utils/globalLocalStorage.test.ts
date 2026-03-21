@@ -5,7 +5,7 @@ import {
   globalGetLocalStorage as originalGlobalGetLocalStorage,
   globalRemoveLocalStorage as originalGlobalRemoveLocalStorage,
   globalSetLocalStorage as originalGlobalSetLocalStorage,
-} from "@/utils/globalLocalStorage";
+} from "@/utils/global-local-storage";
 
 interface TestLocalStorage {
   string: string;

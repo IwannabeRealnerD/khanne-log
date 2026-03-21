@@ -5,7 +5,7 @@ import {
   globalGetSessionStorage as originalGlobalGetSessionStorage,
   globalRemoveSessionStorage as originalGlobalRemoveSessionStorage,
   globalSetSessionStorage as originalGlobalSetSessionStorage,
-} from "@/utils/globalSessionStorage";
+} from "@/utils/global-session-storage";
 
 interface TestSessionStorage {
   string: string;

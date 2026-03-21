@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 
-import { LineListSection } from "./components/LineListSection";
-import { LineListSectionSkeleton } from "./components/LineListSectionSkeleton";
+import { LineListSection } from "./components/line-list-section";
+import { LineListSectionSkeleton } from "./components/line-list-section-skeleton";
 
 const LinePage = async (props: PageProps<"/lines">) => {
   const { page } = await props.searchParams;
