@@ -1,11 +1,11 @@
 import { GLOBAL_ITEMS_PER_PAGE, GLOBAL_PAGINATION_MAX_VISIBLE_PAGES } from "@/constants/pagination";
 
-interface InternalRefinePaginationIndexesArgs {
+interface GenerateVisiblePagesArgs {
   currentPage: number;
   totalPageCount: number;
 }
 
-export const internalGenerateVisiblePages = ({ currentPage, totalPageCount }: InternalRefinePaginationIndexesArgs) => {
+export const generateVisiblePages = ({ currentPage, totalPageCount }: GenerateVisiblePagesArgs) => {
   if (totalPageCount <= GLOBAL_ITEMS_PER_PAGE) {
     return { pages: Array.from({ length: totalPageCount }, (_, index) => index + 1), firstPage: null, lastPage: null };
   }
