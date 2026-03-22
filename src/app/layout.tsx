@@ -17,6 +17,7 @@ const RootLayout = async (props: LayoutProps<"/">) => {
         <header className="border-b border-border">
           <div className="mx-auto flex max-w-screen-md items-center justify-between px-page py-2">
             <Link className="text-body font-semibold tracking-tight text-fg" href="/">
+              {/* eslint-disable-next-line @cspell/spellchecker */}
               <span className="text-h3 font-bold text-accent">K</span>hanne Log
             </Link>
             <nav className="flex gap-4">
