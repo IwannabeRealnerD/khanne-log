@@ -9,7 +9,6 @@ export const GlobalLineScheme = object({
   from: GlobalOttServiceNameSchema,
   scene_description: string(),
   key_points: array(string()),
-  comment: string(),
   when: string(),
   added_date: string(),
   is_spoiler: boolean(),
