@@ -48,7 +48,7 @@ export const Title: FunctionComponent<TitleProps> = (props) => {
   const quoteText = isTitleTooLong && !isOpen ? mainTitle.slice(0, MAX_TITLE_LENGTH) + "..." : mainTitle;
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 border-t border-border bg-bg-subtle px-4 py-4">
       {isTitleTooLong ? (
         <button className="cursor-pointer text-left" onClick={toggleOpen}>
           <p

@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+
 import { GlobalPagination } from "@/components/pagination";
 import { GLOBAL_DATABASE_NAME } from "@/constants/database-name";
 import { GLOBAL_ITEMS_PER_PAGE } from "@/constants/pagination";
@@ -33,18 +35,17 @@ export const LineListSection = async (props: { currentPage: number }) => {
   const totalPageCount = Math.ceil(database.length / itemsPerPage);
   const startIndex = (props.currentPage - 1) * itemsPerPage;
   const endIndex = props.currentPage * itemsPerPage;
-  const pageData = database.slice(startIndex, endIndex);
+  const slicedData = database.slice(startIndex, endIndex);
 
   return (
     <div className="flex flex-col gap-2">
       <div className="flex flex-col gap-6">
-        {pageData.map((item) => {
+        {slicedData.map((item) => {
           return (
             <article
               key={`${item.id}`}
               className="rounded-lg border border-border bg-surface shadow-sm transition-shadow hover:shadow-md"
             >
-              {/* Header: 작품 메타 정보 */}
               <div className="flex items-start justify-between gap-3 px-4 pt-4 pb-3">
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-2">
@@ -61,18 +62,21 @@ export const LineListSection = async (props: { currentPage: number }) => {
                   {item.added_date ? new Date(item.added_date).toLocaleDateString("ko") : ""}
                 </span>
               </div>
-
-              {/* Body: 인용문 (메인 콘텐츠) */}
-              <div className="border-t border-border bg-bg-subtle px-4 py-4">
-                <Title id={item.id} quote={item.quote} scene_description={item.scene_description} />
-              </div>
-
-              {/* Footer: 코멘트 */}
-              {item.comment && (
-                <div className="border-t border-border px-4 py-3">
-                  <Comment comment={item.comment} id={item.id} />
-                </div>
-              )}
+              <Title id={item.id} quote={item.quote} scene_description={item.scene_description} />
+              <Suspense
+                key={item.id}
+                fallback={
+                  <div className="border-t border-border px-4 py-3">
+                    <div className="flex flex-col gap-1.5">
+                      {Array.from({ length: Math.floor(Math.random() * 13) + 3 }).map((_, i) => (
+                        <div key={i + 1} className="h-3.5 w-full animate-pulse rounded bg-bg-subtle" />
+                      ))}
+                    </div>
+                  </div>
+                }
+              >
+                <Comment pageId={item.id} />
+              </Suspense>
             </article>
           );
         })}

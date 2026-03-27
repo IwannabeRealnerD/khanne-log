@@ -8,8 +8,8 @@ import { GlobalDatabaseName } from "@/types/database-name";
 import { GlobalLine, GlobalLineScheme } from "@/types/database-scheme";
 import { GlobalOttServiceNameSchema } from "@/types/ott-service-name";
 
-import { getCheckbox, getCreatedTime, getMultiSelect, getRichText, getSelectAsEnum, getTitle } from "./property-type";
-import { QueryDatabaseParameters } from "./query-body";
+import { getCheckbox, getCreatedTime, getMultiSelect, getRichText, getSelectAsEnum, getTitle } from "../property-type";
+import { QueryDatabaseParameters } from "../query-body";
 
 export const getDataUntilDone = async (
   databaseName: GlobalDatabaseName,
@@ -40,7 +40,7 @@ export const getDataUntilDone = async (
   }
 
   if (response.results.length > 0 && isFullPage(response.results[0])) {
-    response.results.forEach((_result) => {
+    for (const _result of response.results) {
       const result = _result as Extract<QueryDatabaseResponse["results"][number], { properties: unknown }>;
       if (!isFullPage(result)) {
         throw new Error("Notion database query returned non-full page");
@@ -57,7 +57,6 @@ export const getDataUntilDone = async (
             pick(GlobalLineScheme, ["scene_description"]).entries.scene_description
           ),
           key_points: getMultiSelect(result.properties.key_points),
-          comment: getRichText(result.properties.comment, pick(GlobalLineScheme, ["comment"]).entries.comment),
           when: getRichText(result.properties.when, pick(GlobalLineScheme, ["when"]).entries.when),
           added_date: getCreatedTime(
             result.properties.added_date,
@@ -74,7 +73,7 @@ export const getDataUntilDone = async (
         }
         copiedTempResults.push(parsedData.output);
       }
-    });
+    }
   }
   if (response.has_more && response.next_cursor) {
     return getDataUntilDone(databaseName, queryBody, copiedTempResults, response.next_cursor);

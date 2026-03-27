@@ -1,27 +1,22 @@
 import { FunctionComponent } from "react";
 
+import Markdown from "react-markdown";
+
+import { getPageMarkdown } from "@/utils/notion/get-page-markdown";
+
 interface CommentProps {
-  comment: string | null;
-  id: string;
+  pageId: string;
 }
-export const Comment: FunctionComponent<CommentProps> = (props) => {
-  if (!props.comment) {
+
+export const Comment: FunctionComponent<CommentProps> = async (props) => {
+  const comment = await getPageMarkdown(props.pageId);
+  if (!comment) {
     return null;
   }
 
-  const lines = props.comment.split("\n");
-
-  if (lines.length === 1) {
-    return <p className="text-body text-muted">{lines[0]}</p>;
-  }
-
   return (
-    <ul className="flex flex-col gap-1">
-      {lines.map((line, index) => (
-        <li key={`${props.id}-${index}`} className="text-body break-keep text-muted">
-          {line}
-        </li>
-      ))}
-    </ul>
+    <div className="prose prose-sm max-w-full border-t border-border px-4 py-3 text-muted">
+      <Markdown>{comment}</Markdown>
+    </div>
   );
 };
