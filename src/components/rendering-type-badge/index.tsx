@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 
+import { ROUTE_RENDERING_CONFIG } from "./constants/contents";
+
 export const GlobalRenderingTypeBadge = () => {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
