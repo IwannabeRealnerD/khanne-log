@@ -8,9 +8,11 @@ const LinePage = async (props: PageProps<"/lines">) => {
   const currentPage = page ? Number(page) : 1;
 
   return (
-    <Suspense key={currentPage} fallback={<LineListSectionSkeleton />}>
-      <LineListSection currentPage={currentPage} />
-    </Suspense>
+    <>
+      <Suspense key={currentPage} fallback={<LineListSectionSkeleton />}>
+        <LineListSection currentPage={currentPage} />
+      </Suspense>
+    </>
   );
 };
 
