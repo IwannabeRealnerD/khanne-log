@@ -1,10 +1,8 @@
 import { GlobalNavItem } from "@/components/nav-item";
-import { GlobalRenderingTypeBadge } from "@/components/rendering-type-badge";
 
 const HomePage = () => {
   return (
     <div className="flex min-h-[60vh] flex-col items-center justify-center">
-      <GlobalRenderingTypeBadge type="static" />
       <h2 className="text-h2 font-bold tracking-tight text-fg">Khanne Log</h2>
       <p className="mt-2 text-body text-muted">movies, series, and games I love</p>
       <div className="mt-3 h-0.5 w-8 rounded-full bg-accent" />
