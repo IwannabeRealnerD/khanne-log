@@ -5,20 +5,30 @@ import { QueryDatabaseResponse } from "@notionhq/client/build/src/api-endpoints"
 import { pick, safeParse } from "valibot";
 
 import { GlobalDatabaseName } from "@/types/database-name";
-import { GlobalLine, GlobalLineScheme } from "@/types/database-scheme";
+import { GlobalLine, GlobalLineScheme, GlobalReview, GlobalReviewScheme } from "@/types/database-scheme";
 import { GlobalOttServiceNameSchema } from "@/types/ott-service-name";
 
 import { getCheckbox, getCreatedTime, getMultiSelect, getRichText, getSelectAsEnum, getTitle } from "../property-type";
 import { QueryDatabaseParameters } from "../query-body";
 
+type GlobalDatabaseItem = GlobalLine | GlobalReview;
+
+const DATABASE_ID_ENV_KEY_BY_DATABASE_NAME = {
+  LINES: "NOTION_LINES_DATABASE_ID",
+  REVIEWS: "NOTION_REVIEWS_DATABASE_ID",
+} as const satisfies Record<GlobalDatabaseName, string>;
+
 export const getDataUntilDone = async (
   databaseName: GlobalDatabaseName,
   queryBody: QueryDatabaseParameters,
-  prevResults?: GlobalLine[],
+  prevResults?: GlobalDatabaseItem[],
   nextCursor?: string
-): Promise<GlobalLine[]> => {
-  if (!process.env.NOTION_LINES_DATABASE_ID) {
-    throw new Error("NOTION_DATABASE_ID_LINES is not set");
+): Promise<GlobalDatabaseItem[]> => {
+  const databaseIdEnvKey = DATABASE_ID_ENV_KEY_BY_DATABASE_NAME[databaseName];
+  const databaseId = process.env[databaseIdEnvKey];
+
+  if (!databaseId) {
+    throw new Error(`${databaseIdEnvKey} is not set`);
   }
   if (!process.env.NOTION_API_KEY) {
     throw new Error("NOTION_API_KEY is not set");
@@ -30,7 +40,7 @@ export const getDataUntilDone = async (
   });
 
   const response = await notionClient.databases.query({
-    database_id: process.env.NOTION_LINES_DATABASE_ID,
+    database_id: databaseId,
     ...queryBody,
     start_cursor: nextCursor,
   });
@@ -70,6 +80,25 @@ export const getDataUntilDone = async (
         const parsedData = safeParse(GlobalLineScheme, refinedLineItem);
         if (!parsedData.success) {
           throw new Error(`Failed to parse line item: ${parsedData.issues}`);
+        }
+        copiedTempResults.push(parsedData.output);
+      }
+
+      if (databaseName === "REVIEWS") {
+        const refinedReviewItem = {
+          id: result.id,
+          title: getTitle(result.properties.title, pick(GlobalReviewScheme, ["title"]).entries.title),
+          from: getMultiSelect(result.properties.from),
+          key_points: getMultiSelect(result.properties.key_points),
+          added_date: getCreatedTime(
+            result.properties.added_date,
+            pick(GlobalReviewScheme, ["added_date"]).entries.added_date
+          ),
+          is_done: getCheckbox(result.properties.isDone, pick(GlobalReviewScheme, ["is_done"]).entries.is_done),
+        };
+        const parsedData = safeParse(GlobalReviewScheme, refinedReviewItem);
+        if (!parsedData.success) {
+          throw new Error(`Failed to parse review item: ${parsedData.issues}`);
         }
         copiedTempResults.push(parsedData.output);
       }

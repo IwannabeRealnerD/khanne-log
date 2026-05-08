@@ -1,7 +1,12 @@
 /**
- * @description the number of contents to be displayed per page
+ * @description the number of line contents to be displayed per page
  */
-export const GLOBAL_ITEMS_PER_PAGE = 3;
+export const GLOBAL_LINES_ITEMS_PER_PAGE = 3;
+
+/**
+ * @description the number of review contents to be displayed per page
+ */
+export const GLOBAL_REVIEWS_ITEMS_PER_PAGE = 5;
 
 /**
  * @description the number of pages to be displayed at a time

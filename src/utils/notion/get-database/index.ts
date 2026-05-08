@@ -1,15 +1,20 @@
 import { cacheLife } from "next/cache";
 
 import { GlobalDatabaseName } from "@/types/database-name";
-import { GlobalLine } from "@/types/database-scheme";
+import { GlobalLine, GlobalReview } from "@/types/database-scheme";
 
 import { getDataUntilDone } from "./get-data-until-done";
 import { QueryDatabaseParameters } from "./query-body";
 
-export async function globalGetDatabase(
-  databaseName: GlobalDatabaseName,
+type GlobalDatabaseDataByName = {
+  LINES: GlobalLine[];
+  REVIEWS: GlobalReview[];
+};
+
+export async function globalGetDatabase<TDatabaseName extends GlobalDatabaseName>(
+  databaseName: TDatabaseName,
   queryBody?: QueryDatabaseParameters
-): Promise<GlobalLine[] | undefined> {
+): Promise<GlobalDatabaseDataByName[TDatabaseName] | undefined> {
   "use cache";
   cacheLife("hours");
 
@@ -29,5 +34,5 @@ export async function globalGetDatabase(
     return undefined;
   }
 
-  return response.data;
+  return response.data as GlobalDatabaseDataByName[TDatabaseName];
 }

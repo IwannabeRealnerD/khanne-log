@@ -1,19 +1,14 @@
-import { Suspense } from "react";
-
 import { GlobalKeyPoints } from "@/components/key-points";
 import { GlobalOttBadge } from "@/components/ott-badge";
 import { GlobalPagination } from "@/components/pagination";
 import { GLOBAL_DATABASE_NAME } from "@/constants/database-name";
-import { GLOBAL_LINES_ITEMS_PER_PAGE } from "@/constants/pagination";
+import { GLOBAL_REVIEWS_ITEMS_PER_PAGE } from "@/constants/pagination";
 import { globalGetDatabase } from "@/utils/notion/get-database";
 
-import { Comment } from "./comment";
-import { Title } from "./title";
-
-export const LineListSection = async (props: { currentPage: number }) => {
-  const database = await globalGetDatabase(GLOBAL_DATABASE_NAME.LINES, {
+export const ReviewListSection = async (props: { currentPage: number }) => {
+  const database = await globalGetDatabase(GLOBAL_DATABASE_NAME.REVIEWS, {
     filter: {
-      property: "is_done",
+      property: "isDone",
       checkbox: {
         equals: true,
       },
@@ -30,9 +25,9 @@ export const LineListSection = async (props: { currentPage: number }) => {
     return <p>No items to show</p>;
   }
 
-  const totalPageCount = Math.ceil(GLOBAL_LINES_ITEMS_PER_PAGE);
-  const startIndex = (props.currentPage - 1) * GLOBAL_LINES_ITEMS_PER_PAGE;
-  const endIndex = props.currentPage * GLOBAL_LINES_ITEMS_PER_PAGE;
+  const totalPageCount = Math.ceil(database.length / GLOBAL_REVIEWS_ITEMS_PER_PAGE);
+  const startIndex = (props.currentPage - 1) * GLOBAL_REVIEWS_ITEMS_PER_PAGE;
+  const endIndex = props.currentPage * GLOBAL_REVIEWS_ITEMS_PER_PAGE;
   const slicedData = database.slice(startIndex, endIndex);
 
   return (
@@ -48,11 +43,13 @@ export const LineListSection = async (props: { currentPage: number }) => {
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-2">
                     <h3 className="text-body font-semibold text-fg">{item.title}</h3>
-                    <GlobalOttBadge ottName={item.from} />
+                    <div className="flex items-center gap-1.5">
+                      {item.from.map((ottName) => (
+                        <GlobalOttBadge key={ottName} ottName={ottName} />
+                      ))}
+                    </div>
                   </div>
                   <div className="mt-0.5 flex items-center gap-1.5 text-caption text-muted">
-                    {item.when && <span>{item.when}</span>}
-                    {item.when && item.key_points.length > 0 && <span>·</span>}
                     <GlobalKeyPoints keyPoints={item.key_points} />
                   </div>
                 </div>
@@ -60,26 +57,11 @@ export const LineListSection = async (props: { currentPage: number }) => {
                   {item.added_date ? new Date(item.added_date).toLocaleDateString("ko") : ""}
                 </span>
               </div>
-              <Title id={item.id} quote={item.quote} scene_description={item.scene_description} />
-              <Suspense
-                key={item.id}
-                fallback={
-                  <div className="border-t border-border px-4 py-3">
-                    <div className="flex flex-col gap-1.5">
-                      {Array.from({ length: Math.floor(Math.random() * 13) + 3 }).map((_, i) => (
-                        <div key={i + 1} className="h-3.5 w-full animate-pulse rounded bg-bg-subtle" />
-                      ))}
-                    </div>
-                  </div>
-                }
-              >
-                <Comment pageId={item.id} />
-              </Suspense>
             </article>
           );
         })}
       </div>
-      <GlobalPagination currentPage={props.currentPage} totalPageCount={totalPageCount} />
+      <GlobalPagination basePath="/movies-series" currentPage={props.currentPage} totalPageCount={totalPageCount} />
     </div>
   );
 };

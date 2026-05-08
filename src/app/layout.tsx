@@ -27,6 +27,12 @@ const RootLayout = async (props: LayoutProps<"/">) => {
               <Link className="text-caption text-muted transition-colors hover:text-accent" href="/lines?page=1">
                 Lines
               </Link>
+              <Link
+                className="text-caption text-muted transition-colors hover:text-accent"
+                href="/movies-series?page=1"
+              >
+                Reviews
+              </Link>
             </nav>
           </div>
         </header>

@@ -1,4 +1,5 @@
 import { FunctionComponent } from "react";
+import type { Route } from "next";
 import Link from "next/link";
 
 import { globalCn } from "@/utils/global-cn";
@@ -8,9 +9,11 @@ import { generateVisiblePages } from "./generate-visible-pages";
 interface GlobalPaginationProps {
   totalPageCount: number;
   currentPage: number;
+  basePath?: Route;
 }
 
 export const GlobalPagination: FunctionComponent<GlobalPaginationProps> = (props) => {
+  const basePath = props.basePath ?? "/lines";
   const pagesToShow = generateVisiblePages({
     currentPage: props.currentPage,
     totalPageCount: props.totalPageCount,
@@ -23,7 +26,7 @@ export const GlobalPagination: FunctionComponent<GlobalPaginationProps> = (props
           <Link
             replace
             className="flex size-7 items-center justify-center rounded-md border border-border text-body"
-            href={`/lines?page=${pagesToShow.firstPage}`}
+            href={`${basePath}?page=${pagesToShow.firstPage}` as Route}
           >
             {pagesToShow.firstPage}
           </Link>
@@ -39,7 +42,7 @@ export const GlobalPagination: FunctionComponent<GlobalPaginationProps> = (props
               "flex size-7 items-center justify-center rounded-md border border-border text-body",
               props.currentPage === page && "border-border-accent bg-bg-accent text-accent font-medium"
             )}
-            href={`/lines?page=${page}`}
+            href={`${basePath}?page=${page}` as Route}
           >
             {page}
           </Link>
@@ -51,7 +54,7 @@ export const GlobalPagination: FunctionComponent<GlobalPaginationProps> = (props
           <Link
             replace
             className="flex size-7 items-center justify-center rounded-md border border-border text-body"
-            href={`/lines?page=${pagesToShow.lastPage}`}
+            href={`${basePath}?page=${pagesToShow.lastPage}` as Route}
           >
             {pagesToShow.lastPage}
           </Link>

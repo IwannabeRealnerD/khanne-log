@@ -1,4 +1,4 @@
-import { GLOBAL_ITEMS_PER_PAGE, GLOBAL_PAGINATION_MAX_VISIBLE_PAGES } from "@/constants/pagination";
+import { GLOBAL_PAGINATION_MAX_VISIBLE_PAGES } from "@/constants/pagination";
 
 interface GenerateVisiblePagesArgs {
   currentPage: number;
@@ -6,7 +6,7 @@ interface GenerateVisiblePagesArgs {
 }
 
 export const generateVisiblePages = ({ currentPage, totalPageCount }: GenerateVisiblePagesArgs) => {
-  if (totalPageCount <= GLOBAL_ITEMS_PER_PAGE) {
+  if (totalPageCount <= GLOBAL_PAGINATION_MAX_VISIBLE_PAGES) {
     return { pages: Array.from({ length: totalPageCount }, (_, index) => index + 1), firstPage: null, lastPage: null };
   }
 
