@@ -1,5 +1,8 @@
 import { Suspense } from "react";
 
+import { GlobalRenderingTypeBadge } from "@/components/rendering-type-badge";
+import { ROUTE_RENDERING_CONFIG } from "@/components/rendering-type-badge/constants/contents";
+
 import { LineListSection } from "./components/line-list-section";
 import { LineListSectionSkeleton } from "./components/line-list-section-skeleton";
 
@@ -12,6 +15,7 @@ const LinePage = async (props: PageProps<"/lines">) => {
       <Suspense key={currentPage} fallback={<LineListSectionSkeleton />}>
         <LineListSection currentPage={currentPage} />
       </Suspense>
+      <GlobalRenderingTypeBadge config={ROUTE_RENDERING_CONFIG["/lines"]} />
     </>
   );
 };

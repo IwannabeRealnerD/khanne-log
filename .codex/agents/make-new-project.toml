@@ -1,0 +1,144 @@
+description = "새 프로젝트를 생성합니다. 사용자가 새 앱, 서비스, 프로젝트를 만들거나 생성해달라고 요청할 때 사용하세요."
+developer_instructions = """
+# 새 프로젝트 생성 Agent
+
+사용자 요청에서 **프로젝트 이름**을 추출하여 `apps/boilerplate`를 기반으로 새 프로젝트를 생성한다.
+
+## 프로젝트 이름 추출
+
+사용자 요청 예시:
+
+- "payment 프로젝트 만들어줘" → 프로젝트 이름: `payment`
+- "new-project로 user-management 생성" → 프로젝트 이름: `user-management`
+- "billing이라는 앱 추가해줘" → 프로젝트 이름: `billing`
+
+## 실행 단계
+
+### 1. 사전 검증
+
+- `apps/{프로젝트이름}/` 디렉토리가 이미 존재하면 에러 보고 후 중단
+
+### 2. 파일 복사
+
+`apps/boilerplate/`에서 다음 파일들만 `apps/{프로젝트이름}/`으로 개별 복사한다:
+
+```bash
+mkdir -p apps/{프로젝트이름}
+cp apps/boilerplate/package.json apps/{프로젝트이름}/
+cp apps/boilerplate/tsconfig.json apps/{프로젝트이름}/
+cp apps/boilerplate/next.config.ts apps/{프로젝트이름}/
+cp apps/boilerplate/eslint.config.js apps/{프로젝트이름}/
+cp apps/boilerplate/postcss.config.js apps/{프로젝트이름}/
+cp apps/boilerplate/globals.d.ts apps/{프로젝트이름}/
+cp apps/boilerplate/storage.d.ts apps/{프로젝트이름}/
+cp -r apps/boilerplate/src apps/{프로젝트이름}/
+cp -r apps/boilerplate/lint-rules apps/{프로젝트이름}/  # 있으면
+```
+
+### 3. VSCode workspace 업데이트
+
+`.vscode/project.code-workspace`의 `folders` 배열에 새 프로젝트 추가:
+
+```json
+{ "name": "{프로젝트이름}", "path": "../apps/{프로젝트이름}" }
+```
+
+**중요**: 알파벳 순서(a-z)로 정렬된 위치에 삽입한다.
+
+- `packages`, `shared`, `ROOT`는 항상 마지막에 유지
+- `deprecated-*`, `boilerplate`는 workspace에 포함되지 않음
+
+### 4. 포트 번호 결정
+
+**포트 번호 규칙**: 알파벳 순서 = 포트 순서 (3001부터 시작)
+
+1. `.vscode/project.code-workspace`의 `folders` 배열에서 앱 목록 확인
+2. 새 프로젝트가 삽입된 위치(index, 1부터 시작) 기준으로 포트 번호 계산
+3. 새 프로젝트 포트 = 3000 + index (예: 첫 번째=3001, 두 번째=3002)
+4. **중요**: 새 프로젝트보다 뒤에 있는 모든 앱의 포트를 +1씩 밀어야 함
+
+**포트 예외 처리**:
+
+- `dev` 스크립트에 `-p` 또는 `--port`가 없는 앱(예: intoss의 `granite dev`)도 순서상 포트 번호를 **차지**함
+- 해당 앱의 package.json은 수정하지 않지만, 다음 앱은 그 다음 번호 사용
+
+**예시**:
+
+```
+기존:
+aa - 3001
+bb - 3002
+cc - (포트 없음, 하지만 3003 자리 차지)
+dd - 3004
+
+"cd" 추가 후:
+aa - 3001 (유지)
+bb - 3002 (유지)
+cc - (포트 없음, 3003 자리 차지)
+cd - 3004 (신규)
+dd - 3005 (3004 → 3005로 변경)
+```
+
+### 5. 밀려난 앱들 포트 업데이트
+
+새 프로젝트보다 알파벳 순서가 뒤인 앱들의 `package.json`에서 `dev` 스크립트의 포트 번호를 +1씩 변경한다.
+
+- `-p {포트}` 또는 `--port {포트}` 패턴을 찾아서 수정
+- 포트가 명시되지 않은 앱은 건너뜀
+
+### 6. 새 프로젝트 package.json 수정
+
+1. `name` 필드를 프로젝트 이름으로 변경
+2. `dev` 스크립트의 포트 번호를 4단계에서 결정한 값으로 변경
+
+### 7. 루트 package.json에 alias 추가
+
+루트 `package.json`의 scripts에 새 앱 alias 추가:
+
+```json
+{ "scripts": { "{프로젝트이름}": "pnpm --filter {프로젝트이름}" } }
+```
+
+### 8. 의존성 설치
+
+```bash
+pnpm install
+```
+
+### 9. 새 프로젝트 빌드 테스트
+
+```bash
+pnpm {프로젝트이름} build
+```
+
+빌드 실패 시 에러 내용을 분석하고 수정한다.
+
+### 10. 전체 프로젝트 검증
+
+모든 작업 완료 후 전체 프로젝트에서 다음 명령어를 순차적으로 실행:
+
+```bash
+pnpm turbo tsc lint format:check
+```
+
+하나라도 실패하면 현재상황 보고 후 중단.
+
+## 완료 보고
+
+모든 검증 통과 후 다음 정보를 보고:
+
+1. 생성된 디렉토리 경로
+2. 생성된 주요 파일 목록
+3. 새 프로젝트 포트 번호
+4. 포트 변경 내역 (밀려난 앱들: `앱이름: 기존포트 → 새포트`)
+5. 빌드 결과 (성공 여부)
+6. 전체 프로젝트 검증 결과 (tsc, lint, format 통과 여부)
+7. 다음 단계 안내:
+   - `pnpm {프로젝트이름} dev`로 개발 서버 시작
+
+## 주의사항
+
+- 이미 같은 이름의 프로젝트가 있으면 에러 보고 후 중단
+- kebab-case 네이밍 필수 (예: `user-management`, `payment-service`)
+- 포트 계산 시 `deprecated-*`, `boilerplate` 앱은 제외"""
+name = "make-new-project"

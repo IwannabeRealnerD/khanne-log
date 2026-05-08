@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Link from "next/link";
 
-import { GlobalRenderingTypeBadge } from "@/components/rendering-type-badge";
-
 import "../styles/app.css";
 const inter = Inter({ subsets: ["latin"] });
 
@@ -35,7 +33,6 @@ const RootLayout = async (props: LayoutProps<"/">) => {
         <main className="min-h-[calc(100vh-8rem)] px-page py-8">
           <div className="mx-auto max-w-screen-md">{props.children}</div>
         </main>
-        <GlobalRenderingTypeBadge />
         <footer className="border-t border-border">
           <div className="mx-auto max-w-screen-md px-page py-6 text-center">
             <p className="text-caption text-subtle">&copy; 2026 Khanne</p>

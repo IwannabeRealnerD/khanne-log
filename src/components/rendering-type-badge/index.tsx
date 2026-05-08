@@ -1,19 +1,13 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { usePathname } from "next/navigation";
+import Link from "next/link";
 
-import { ROUTE_RENDERING_CONFIG } from "./constants/contents";
+import type { RenderingTypeConfig } from "./types";
 
-export const GlobalRenderingTypeBadge = () => {
-  const pathname = usePathname();
+export const GlobalRenderingTypeBadge = ({ config }: { config: RenderingTypeConfig }) => {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const config = ROUTE_RENDERING_CONFIG[pathname];
-
-  useEffect(() => {
-    setIsOpen(false);
-  }, [pathname]);
 
   useEffect(() => {
     if (!isOpen) {
@@ -28,10 +22,6 @@ export const GlobalRenderingTypeBadge = () => {
     return () => document.removeEventListener("mousedown", handleClickOutsideWhenOpened);
   }, [isOpen]);
 
-  if (!config) {
-    return null;
-  }
-
   return (
     <div className="fixed right-4 bottom-4 z-50 flex flex-col items-end gap-2">
       {isOpen && (
@@ -44,6 +34,7 @@ export const GlobalRenderingTypeBadge = () => {
           </ul>
         </div>
       )}
+      <Link href="/hi">hi</Link>
       <button
         className="rounded-md border border-border bg-bg-subtle px-3 py-1.5 text-caption text-muted shadow-sm transition-colors hover:bg-bg-muted"
         type="button"
