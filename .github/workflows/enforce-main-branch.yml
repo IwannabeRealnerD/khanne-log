@@ -1,0 +1,23 @@
+name: Check isToMain
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - edited
+
+jobs:
+  check-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check target branch
+        env:
+          BASE_BRANCH: ${{ github.event.pull_request.base.ref }}
+        run: |
+          if [[ "$BASE_BRANCH" != "main" ]]; then
+            echo "Error: Pull requests must target the 'main' branch."
+            exit 1
+          fi
+          echo "Branch check passed. The base branch is 'main'."
