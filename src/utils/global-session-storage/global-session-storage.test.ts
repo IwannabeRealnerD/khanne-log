@@ -1,11 +1,12 @@
 import { describe, beforeEach, test, expect } from "vitest";
 
 import { GLOBAL_DATE_PREFIX } from "@/constants/date";
+
 import {
   globalGetSessionStorage as originalGlobalGetSessionStorage,
   globalRemoveSessionStorage as originalGlobalRemoveSessionStorage,
   globalSetSessionStorage as originalGlobalSetSessionStorage,
-} from "@/utils/global-session-storage";
+} from ".";
 
 interface TestSessionStorage {
   string: string;

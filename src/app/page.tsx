@@ -12,7 +12,7 @@ const HomePage = () => {
 
         <nav className="mt-8 flex w-full max-w-sm flex-col gap-3">
           <GlobalNavItem description="memorable quotes from what I watched" href="/lines?page=1" label="Lines" />
-          <GlobalNavItem disabled description="movies & series reviews" href="#" label="Movies & Series" />
+          <GlobalNavItem description="movies & series reviews" href="/movies-series?page=1" label="Movies & Series" />
           <GlobalNavItem disabled description="game logs & reviews" href="#" label="Games" />
         </nav>
       </div>

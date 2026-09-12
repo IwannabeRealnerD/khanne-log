@@ -65,8 +65,7 @@
     "vite-tsconfig-paths": "^4.3.2"
   },
   "engines": {
-    "node": "22.16.0",
-    "pnpm": "10.12.1"
+    "node": "24.x"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx}": [

@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
 
 import type { RenderingTypeConfig } from "./types";
 
@@ -34,7 +33,6 @@ export const GlobalRenderingTypeBadge = ({ config }: { config: RenderingTypeConf
           </ul>
         </div>
       )}
-      <Link href="/hi">hi</Link>
       <button
         className="rounded-md border border-border bg-bg-subtle px-3 py-1.5 text-caption text-muted shadow-sm transition-colors hover:bg-bg-muted"
         type="button"

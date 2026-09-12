@@ -1,11 +1,12 @@
 import { describe, beforeEach, test, expect } from "vitest";
 
 import { GLOBAL_DATE_PREFIX } from "@/constants/date";
+
 import {
   globalGetLocalStorage as originalGlobalGetLocalStorage,
   globalRemoveLocalStorage as originalGlobalRemoveLocalStorage,
   globalSetLocalStorage as originalGlobalSetLocalStorage,
-} from "@/utils/global-local-storage";
+} from ".";
 
 interface TestLocalStorage {
   string: string;

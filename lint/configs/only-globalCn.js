@@ -2,7 +2,7 @@ import { defineConfig } from "eslint/config";
 
 export const onlyGlobalCn = defineConfig([
   {
-    ignores: ["src/utils/globalCn.ts"],
+    ignores: ["src/utils/global-cn.ts"],
     rules: {
       "no-restricted-imports": [
         "error",

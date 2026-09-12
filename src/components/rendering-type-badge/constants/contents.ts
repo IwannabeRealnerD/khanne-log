@@ -18,4 +18,14 @@ export const ROUTE_RENDERING_CONFIG = {
       "Notion 데이터는 1시간 캐시, 만료 후 첫 요청 시 백그라운드에서 최신 데이터로 갱신(ISR).",
     ],
   },
+  "/movies-series": {
+    icon: "◐",
+    label: "Partial Prerender",
+    summary: "정적 껍데기 + 동적 스트리밍",
+    details: [
+      "미리 만들어둔 정적 HTML 레이아웃을 즉시 표시.",
+      "작품 리뷰 목록은 Notion 데이터를 가져오는 동안 스켈레톤 UI 표시 후, 서버 스트리밍으로 채워 넣음.",
+      "Notion 데이터는 1시간 캐시, 만료 후 첫 요청 시 백그라운드에서 최신 데이터로 갱신(ISR).",
+    ],
+  },
 } as const;

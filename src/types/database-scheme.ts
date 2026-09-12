@@ -15,3 +15,14 @@ export const GlobalLineScheme = object({
 });
 
 export type GlobalLine = InferInput<typeof GlobalLineScheme>;
+
+export const GlobalReviewScheme = object({
+  id: string(),
+  title: string(),
+  from: array(string()),
+  key_points: array(string()),
+  added_date: string(),
+  is_done: boolean(),
+});
+
+export type GlobalReview = InferInput<typeof GlobalReviewScheme>;
