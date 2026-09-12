@@ -65,7 +65,7 @@
     "vite-tsconfig-paths": "^4.3.2"
   },
   "engines": {
-    "node": "22.16.0",
+    "node": "24.21.0",
     "pnpm": "10.12.1"
   },
   "lint-staged": {

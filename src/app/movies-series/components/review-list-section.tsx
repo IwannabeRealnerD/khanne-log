@@ -1,6 +1,7 @@
 import { GlobalKeyPoints } from "@/components/key-points";
 import { GlobalOttBadge } from "@/components/ott-badge";
 import { GlobalPagination } from "@/components/pagination";
+import { calculateTotalPageCount } from "@/components/pagination/calculate-total-page-count";
 import { GLOBAL_DATABASE_NAME } from "@/constants/database-name";
 import { GLOBAL_REVIEWS_ITEMS_PER_PAGE } from "@/constants/pagination";
 import { globalGetDatabase } from "@/utils/notion/get-database";
@@ -8,7 +9,7 @@ import { globalGetDatabase } from "@/utils/notion/get-database";
 export const ReviewListSection = async (props: { currentPage: number }) => {
   const database = await globalGetDatabase(GLOBAL_DATABASE_NAME.REVIEWS, {
     filter: {
-      property: "isDone",
+      property: "is_done",
       checkbox: {
         equals: true,
       },
@@ -25,7 +26,7 @@ export const ReviewListSection = async (props: { currentPage: number }) => {
     return <p>No items to show</p>;
   }
 
-  const totalPageCount = Math.ceil(database.length / GLOBAL_REVIEWS_ITEMS_PER_PAGE);
+  const totalPageCount = calculateTotalPageCount(database.length, GLOBAL_REVIEWS_ITEMS_PER_PAGE);
   const startIndex = (props.currentPage - 1) * GLOBAL_REVIEWS_ITEMS_PER_PAGE;
   const endIndex = props.currentPage * GLOBAL_REVIEWS_ITEMS_PER_PAGE;
   const slicedData = database.slice(startIndex, endIndex);

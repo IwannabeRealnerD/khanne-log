@@ -94,7 +94,7 @@ export const getDataUntilDone = async (
             result.properties.added_date,
             pick(GlobalReviewScheme, ["added_date"]).entries.added_date
           ),
-          is_done: getCheckbox(result.properties.isDone, pick(GlobalReviewScheme, ["is_done"]).entries.is_done),
+          is_done: getCheckbox(result.properties.is_done, pick(GlobalReviewScheme, ["is_done"]).entries.is_done),
         };
         const parsedData = safeParse(GlobalReviewScheme, refinedReviewItem);
         if (!parsedData.success) {
