@@ -1,4 +1,3 @@
-import { GlobalKeyPoints } from "@/components/key-points";
 import { GlobalOttBadge } from "@/components/ott-badge";
 import { GlobalPagination } from "@/components/pagination";
 import { calculateTotalPageCount } from "@/components/pagination/calculate-total-page-count";
@@ -38,25 +37,38 @@ export const ReviewListSection = async (props: { currentPage: number }) => {
           return (
             <article
               key={`${item.id}`}
-              className="rounded-lg border border-border bg-surface shadow-sm transition-shadow hover:shadow-md"
+              className="rounded-lg border border-border bg-surface shadow-sm transition-[border-color,box-shadow] duration-200 hover:border-border-accent hover:shadow-md"
             >
-              <div className="flex items-start justify-between gap-3 px-4 pt-4 pb-3">
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-center gap-2">
-                    <h3 className="text-body font-semibold text-fg">{item.title}</h3>
-                    <div className="flex items-center gap-1.5">
-                      {item.from.map((ottName) => (
-                        <GlobalOttBadge key={ottName} ottName={ottName} />
-                      ))}
+              <div className="px-5 py-5 sm:px-6 sm:py-6">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="min-w-0 flex-1">
+                    <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1">
+                      <h3 className="text-h3 leading-h3 font-semibold tracking-tight text-fg">{item.title}</h3>
+                      {item.from.length > 0 && (
+                        <div aria-label="감상 채널" className="flex items-center gap-2">
+                          {item.from.map((ottName) => (
+                            <GlobalOttBadge key={ottName} ottName={ottName} />
+                          ))}
+                        </div>
+                      )}
                     </div>
+                    {item.key_points.length > 0 && (
+                      <ul aria-label="리뷰 키워드" className="mt-4 flex flex-wrap gap-2">
+                        {item.key_points.map((keyPoint) => (
+                          <li
+                            key={keyPoint}
+                            className="rounded-full border border-border bg-bg-subtle px-2.5 py-1 text-caption text-muted"
+                          >
+                            {keyPoint}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
-                  <div className="mt-0.5 flex items-center gap-1.5 text-caption text-muted">
-                    <GlobalKeyPoints keyPoints={item.key_points} />
-                  </div>
+                  <time className="shrink-0 text-caption text-subtle" dateTime={item.added_date}>
+                    {item.added_date ? new Date(item.added_date).toLocaleDateString("ko") : ""}
+                  </time>
                 </div>
-                <span className="shrink-0 text-caption text-subtle">
-                  {item.added_date ? new Date(item.added_date).toLocaleDateString("ko") : ""}
-                </span>
               </div>
             </article>
           );
