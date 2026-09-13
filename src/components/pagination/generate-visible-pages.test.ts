@@ -1,8 +1,8 @@
 import { describe, expect, test } from "vitest";
 
-import { generateVisiblePages } from ".";
+import { generateVisiblePages } from "./generate-visible-pages";
 
-describe("generateVisiblePages", () => {
+describe("src/components/pagination/generate-visible-pages -> generateVisiblePages", () => {
   describe("when total pages are less than or equal to the max display pages", () => {
     test("when total pages are 5, it should return all page numbers", () => {
       const result = generateVisiblePages({

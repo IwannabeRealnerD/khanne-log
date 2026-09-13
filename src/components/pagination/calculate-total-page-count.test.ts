@@ -1,8 +1,8 @@
 import { describe, expect, test } from "vitest";
 
-import { calculateTotalPageCount } from ".";
+import { calculateTotalPageCount } from "./calculate-total-page-count";
 
-describe("calculateTotalPageCount", () => {
+describe("src/components/pagination/calculate-total-page-count -> calculateTotalPageCount", () => {
   test.each([
     { itemCount: 0, itemsPerPage: 3, expected: 0 },
     { itemCount: 3, itemsPerPage: 3, expected: 1 },

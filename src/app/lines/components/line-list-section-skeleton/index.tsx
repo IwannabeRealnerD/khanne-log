@@ -1,13 +1,13 @@
 import { FunctionComponent } from "react";
 
-import { SkeletonCard } from "./components/skeleton-card";
+import { LineSkeletonCard } from "./skeleton-card";
 
 export const LineListSectionSkeleton: FunctionComponent = () => {
   return (
     <div className="flex flex-col gap-6">
-      <SkeletonCard lines={7} />
-      <SkeletonCard lines={5} />
-      <SkeletonCard lines={12} />
+      <LineSkeletonCard lines={7} />
+      <LineSkeletonCard lines={5} />
+      <LineSkeletonCard lines={12} />
     </div>
   );
 };

@@ -1,7 +1,6 @@
 import { Suspense } from "react";
 
-import { GlobalRenderingTypeBadge } from "@/components/rendering-type-badge";
-import { ROUTE_RENDERING_CONFIG } from "@/components/rendering-type-badge/constants/contents";
+import { GlobalRenderingTypeBadge, ROUTE_RENDERING_CONFIG } from "@/components/rendering-type-badge";
 
 import { LineListSection } from "./components/line-list-section";
 import { LineListSectionSkeleton } from "./components/line-list-section-skeleton";

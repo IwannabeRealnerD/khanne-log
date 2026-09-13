@@ -1,4 +1,6 @@
-import { describe, beforeEach, test, expect } from "vitest";
+// @vitest-environment jsdom
+
+import { beforeEach, describe, expect, test } from "vitest";
 
 import { GLOBAL_DATE_PREFIX } from "@/constants/date";
 
@@ -38,7 +40,7 @@ const globalGetSessionStorage = originalGlobalGetSessionStorage as OverriddenGlo
 const globalRemoveSessionStorage =
   originalGlobalRemoveSessionStorage as unknown as OverriddenGlobalRemoveSessionStorage;
 
-describe("sharedSessionStorage", () => {
+describe("src/utils/global-session-storage -> global session storage accessors", () => {
   beforeEach(() => {
     sessionStorage.clear();
   });

@@ -1,12 +1,12 @@
 import { Suspense } from "react";
 
-import { GlobalTop } from "@/components/top";
+import { GlobalPageHeading } from "@/components/page-heading";
 
 const MoviesSeriesLayout = async (props: LayoutProps<"/movies-series">) => {
   return (
     <>
       <div className="mb-8 pb-4">
-        <GlobalTop>작품 리뷰</GlobalTop>
+        <GlobalPageHeading>작품 리뷰</GlobalPageHeading>
         <p className="mt-1 text-caption text-muted italic">movies & series reviews</p>
       </div>
       <Suspense>{props.children}</Suspense>

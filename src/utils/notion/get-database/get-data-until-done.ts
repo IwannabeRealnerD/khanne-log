@@ -8,8 +8,8 @@ import { GlobalDatabaseName } from "@/types/database-name";
 import { GlobalLine, GlobalLineScheme, GlobalReview, GlobalReviewScheme } from "@/types/database-scheme";
 import { GlobalOttServiceNameSchema } from "@/types/ott-service-name";
 
-import { getCheckbox, getCreatedTime, getMultiSelect, getRichText, getSelectAsEnum, getTitle } from "../property-type";
-import { QueryDatabaseParameters } from "../query-body";
+import { getCheckbox, getCreatedTime, getMultiSelect, getRichText, getSelectAsEnum, getTitle } from "./property-type";
+import { QueryDatabaseParameters } from "./query-body";
 
 type GlobalDatabaseItem = GlobalLine | GlobalReview;
 

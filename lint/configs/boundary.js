@@ -13,7 +13,7 @@ export const boundaryConfigs = defineConfig([
           default: "allow",
           rules: [
             {
-              disallow: "pages",
+              disallow: "app",
               from: ["apis", "hooks", "types", "utils", "constants", "components"],
             },
           ],
@@ -37,7 +37,7 @@ export const boundaryConfigs = defineConfig([
         { pattern: "src/constants", type: "constants" },
         { pattern: "src/types", type: "types" },
         { pattern: "src/utils", type: "utils" },
-        { pattern: "src/pages", type: "pages" },
+        { pattern: "src/app", type: "app" },
         { pattern: "src/styles", type: "styles" },
       ],
     },

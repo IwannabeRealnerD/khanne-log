@@ -9,7 +9,7 @@ interface NavItemProps {
   disabled?: boolean;
 }
 
-export const GlobalNavItem: FunctionComponent<NavItemProps> = ({ href, label, description, disabled }) => {
+export const NavItem: FunctionComponent<NavItemProps> = ({ href, label, description, disabled }) => {
   if (disabled) {
     return (
       <div className="relative rounded-md border border-border bg-bg-subtle px-6 py-5">
