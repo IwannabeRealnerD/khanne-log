@@ -28,4 +28,14 @@ export const ROUTE_RENDERING_CONFIG = {
       "Notion 데이터는 1시간 캐시, 만료 후 첫 요청 시 백그라운드에서 최신 데이터로 갱신(ISR).",
     ],
   },
+  "/movies-series/[reviewId]": {
+    icon: "◐",
+    label: "Dynamic ISR",
+    summary: "동적 경로 + 캐시된 Notion 데이터",
+    details: [
+      "Notion 페이지 ID로 작품 정보와 리뷰 본문을 조회.",
+      "공개 완료된 리뷰만 표시하고, 중첩된 Notion 블록은 Markdown으로 변환.",
+      "Notion 데이터는 1시간 캐시, 만료 후 첫 요청 시 백그라운드에서 최신 데이터로 갱신(ISR).",
+    ],
+  },
 } as const;
