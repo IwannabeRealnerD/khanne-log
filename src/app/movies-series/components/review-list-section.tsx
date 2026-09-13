@@ -1,7 +1,10 @@
+import Link from "next/link";
+
 import { GlobalOttBadge } from "@/components/ott-badge";
 import { GlobalPagination } from "@/components/pagination";
 import { calculateTotalPageCount } from "@/components/pagination/calculate-total-page-count";
 import { GLOBAL_DATABASE_NAME } from "@/constants/database-name";
+import { GLOBAL_INTERNAL_URL } from "@/constants/internal-url";
 import { GLOBAL_REVIEWS_ITEMS_PER_PAGE } from "@/constants/pagination";
 import { globalGetDatabase } from "@/utils/notion/get-database";
 
@@ -37,9 +40,12 @@ export const ReviewListSection = async (props: { currentPage: number }) => {
           return (
             <article
               key={`${item.id}`}
-              className="rounded-lg border border-border bg-surface shadow-sm transition-[border-color,box-shadow] duration-200 hover:border-border-accent hover:shadow-md"
+              className="rounded-lg border border-border bg-surface shadow-sm transition-[border-color,box-shadow] duration-200 focus-within:border-border-accent focus-within:shadow-md hover:border-border-accent hover:shadow-md"
             >
-              <div className="px-5 py-5 sm:px-6 sm:py-6">
+              <Link
+                className="block rounded-lg px-5 py-5 outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 sm:px-6 sm:py-6"
+                href={GLOBAL_INTERNAL_URL.MOVIES_SERIES_REVIEW(item.id)}
+              >
                 <div className="flex items-start justify-between gap-4">
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1">
@@ -69,7 +75,7 @@ export const ReviewListSection = async (props: { currentPage: number }) => {
                     {item.added_date ? new Date(item.added_date).toLocaleDateString("ko") : ""}
                   </time>
                 </div>
-              </div>
+              </Link>
             </article>
           );
         })}
