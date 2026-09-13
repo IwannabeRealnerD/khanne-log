@@ -6,6 +6,8 @@ import { globalCn } from "@/utils/global-cn";
 
 import { generateVisiblePages } from "./generate-visible-pages";
 
+export { calculateTotalPageCount } from "./calculate-total-page-count";
+
 interface GlobalPaginationProps {
   totalPageCount: number;
   currentPage: number;

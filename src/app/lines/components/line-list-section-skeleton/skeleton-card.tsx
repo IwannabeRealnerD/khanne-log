@@ -1,4 +1,4 @@
-export const SkeletonCard = ({ lines }: { lines: number }) => {
+export const LineSkeletonCard = ({ lines }: { lines: number }) => {
   return (
     <div className="rounded-lg border border-border shadow-sm">
       {/* Header */}

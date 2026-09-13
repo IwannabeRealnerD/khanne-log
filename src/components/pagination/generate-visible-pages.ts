@@ -5,7 +5,13 @@ interface GenerateVisiblePagesArgs {
   totalPageCount: number;
 }
 
-export const generateVisiblePages = ({ currentPage, totalPageCount }: GenerateVisiblePagesArgs) => {
+interface VisiblePages {
+  firstPage: number | null;
+  lastPage: number | null;
+  pages: number[];
+}
+
+export const generateVisiblePages = ({ currentPage, totalPageCount }: GenerateVisiblePagesArgs): VisiblePages => {
   if (totalPageCount <= GLOBAL_PAGINATION_MAX_VISIBLE_PAGES) {
     return { pages: Array.from({ length: totalPageCount }, (_, index) => index + 1), firstPage: null, lastPage: null };
   }

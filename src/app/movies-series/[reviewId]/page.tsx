@@ -5,10 +5,9 @@ import { notFound } from "next/navigation";
 import Markdown from "react-markdown";
 
 import { GlobalOttBadge } from "@/components/ott-badge";
-import { GlobalRenderingTypeBadge } from "@/components/rendering-type-badge";
-import { ROUTE_RENDERING_CONFIG } from "@/components/rendering-type-badge/constants/contents";
-import { getReviewDetail, getReviewPageData } from "@/utils/notion/get-review-detail";
+import { GlobalRenderingTypeBadge, ROUTE_RENDERING_CONFIG } from "@/components/rendering-type-badge";
 
+import { getReviewDetail, getReviewPageData } from "./get-review-detail";
 import ReviewDetailLoading from "./loading";
 
 const DATE_FORMATTER = new Intl.DateTimeFormat("ko", { dateStyle: "long" });

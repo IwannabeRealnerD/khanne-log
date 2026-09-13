@@ -1,3 +1,5 @@
+import type { RenderingTypeConfig } from "./types";
+
 export const ROUTE_RENDERING_CONFIG = {
   "/": {
     icon: "○",
@@ -38,4 +40,4 @@ export const ROUTE_RENDERING_CONFIG = {
       "Notion 데이터는 1시간 캐시, 만료 후 첫 요청 시 백그라운드에서 최신 데이터로 갱신(ISR).",
     ],
   },
-} as const;
+} as const satisfies Record<string, RenderingTypeConfig>;

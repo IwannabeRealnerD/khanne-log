@@ -1,4 +1,4 @@
-export const SkeletonCard = () => {
+export const ReviewSkeletonCard = () => {
   return (
     <div className="rounded-lg border border-border bg-surface shadow-sm">
       <div className="px-5 py-5 sm:px-6 sm:py-6">

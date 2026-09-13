@@ -1,6 +1,6 @@
 import { GLOBAL_DATE_PREFIX } from "@/constants/date";
 
-import { SessionStorage } from "./type";
+import type { SessionStorage } from "./types";
 
 export const globalGetSessionStorage = <T extends keyof SessionStorage>(key: T) => {
   const storageValue = sessionStorage.getItem(key);

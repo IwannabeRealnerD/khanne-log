@@ -4,7 +4,11 @@ import { useEffect, useRef, useState } from "react";
 
 import type { RenderingTypeConfig } from "./types";
 
-export const GlobalRenderingTypeBadge = ({ config }: { config: RenderingTypeConfig }) => {
+interface GlobalRenderingTypeBadgeProps {
+  config: RenderingTypeConfig;
+}
+
+export const GlobalRenderingTypeBadge = ({ config }: GlobalRenderingTypeBadgeProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 

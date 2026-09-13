@@ -1,4 +1,6 @@
-import { describe, beforeEach, test, expect } from "vitest";
+// @vitest-environment jsdom
+
+import { beforeEach, describe, expect, test } from "vitest";
 
 import { GLOBAL_DATE_PREFIX } from "@/constants/date";
 
@@ -37,7 +39,7 @@ const globalSetLocalStorage = originalGlobalSetLocalStorage as OverriddenGlobalS
 const globalGetLocalStorage = originalGlobalGetLocalStorage as OverriddenGlobalGetLocalStorage;
 const globalRemoveLocalStorage = originalGlobalRemoveLocalStorage as unknown as OverriddenGlobalRemoveLocalStorage;
 
-describe("sharedLocalStorage", () => {
+describe("src/utils/global-local-storage -> global local storage accessors", () => {
   beforeEach(() => {
     localStorage.clear();
   });
@@ -129,7 +131,7 @@ describe("sharedLocalStorage", () => {
     expect(result).toBeNull();
   });
 
-  test("should  set array value", () => {
+  test("should set array value", () => {
     const array = ["test", "test2", "test3"];
     globalSetLocalStorage("testStringArray", array);
     const result = localStorage.getItem("testStringArray");

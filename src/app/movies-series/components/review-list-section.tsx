@@ -1,8 +1,7 @@
 import Link from "next/link";
 
 import { GlobalOttBadge } from "@/components/ott-badge";
-import { GlobalPagination } from "@/components/pagination";
-import { calculateTotalPageCount } from "@/components/pagination/calculate-total-page-count";
+import { calculateTotalPageCount, GlobalPagination } from "@/components/pagination";
 import { GLOBAL_DATABASE_NAME } from "@/constants/database-name";
 import { GLOBAL_INTERNAL_URL } from "@/constants/internal-url";
 import { GLOBAL_REVIEWS_ITEMS_PER_PAGE } from "@/constants/pagination";

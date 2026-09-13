@@ -2,9 +2,9 @@ import { cacheLife } from "next/cache";
 
 import { APIErrorCode, Client, isFullPage, isNotionClientError } from "@notionhq/client";
 
-import type { GlobalReviewDetail, GlobalReviewPageData } from "@/types/review-detail";
+import { getPageMarkdown } from "@/utils/notion/get-page-markdown";
 
-import { getPageMarkdown } from "./get-page-markdown";
+import type { ReviewDetail, ReviewPageData } from "./types";
 
 const NOTION_PAGE_ID_PATTERN = /^(?:[\da-f]{32}|[\da-f]{8}(?:-[\da-f]{4}){3}-[\da-f]{12})$/i;
 
@@ -18,7 +18,7 @@ const getNotionClient = () => {
   return new Client({ auth: process.env.NOTION_API_KEY });
 };
 
-export const getReviewPageData = async (pageId: string): Promise<GlobalReviewPageData | null> => {
+export const getReviewPageData = async (pageId: string): Promise<ReviewPageData | null> => {
   "use cache";
   cacheLife("hours");
 
@@ -87,7 +87,7 @@ export const getReviewPageData = async (pageId: string): Promise<GlobalReviewPag
   };
 };
 
-export const getReviewDetail = async (pageId: string): Promise<GlobalReviewDetail | null> => {
+export const getReviewDetail = async (pageId: string): Promise<ReviewDetail | null> => {
   "use cache";
   cacheLife("hours");
 

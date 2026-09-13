@@ -1,14 +1,13 @@
 import { Suspense } from "react";
 
-import { GlobalKeyPoints } from "@/components/key-points";
 import { GlobalOttBadge } from "@/components/ott-badge";
-import { GlobalPagination } from "@/components/pagination";
-import { calculateTotalPageCount } from "@/components/pagination/calculate-total-page-count";
+import { calculateTotalPageCount, GlobalPagination } from "@/components/pagination";
 import { GLOBAL_DATABASE_NAME } from "@/constants/database-name";
 import { GLOBAL_LINES_ITEMS_PER_PAGE } from "@/constants/pagination";
 import { globalGetDatabase } from "@/utils/notion/get-database";
 
 import { Comment } from "./comment";
+import { KeyPoints } from "./key-points";
 import { Title } from "./title";
 
 export const LineListSection = async (props: { currentPage: number }) => {
@@ -54,7 +53,7 @@ export const LineListSection = async (props: { currentPage: number }) => {
                   <div className="mt-0.5 flex items-center gap-1.5 text-caption text-muted">
                     {item.when && <span>{item.when}</span>}
                     {item.when && item.key_points.length > 0 && <span>·</span>}
-                    <GlobalKeyPoints keyPoints={item.key_points} />
+                    <KeyPoints keyPoints={item.key_points} />
                   </div>
                 </div>
                 <span className="shrink-0 text-caption text-subtle">

@@ -2,7 +2,7 @@
 
 import { GLOBAL_DATE_PREFIX } from "@/constants/date";
 
-import { LocalStorage } from "./type";
+import type { LocalStorage } from "./types";
 
 export const globalGetLocalStorage = <T extends keyof LocalStorage>(key: T) => {
   const storageValue = localStorage.getItem(key);

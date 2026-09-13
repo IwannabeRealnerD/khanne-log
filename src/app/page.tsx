@@ -1,6 +1,6 @@
-import { GlobalNavItem } from "@/components/nav-item";
-import { GlobalRenderingTypeBadge } from "@/components/rendering-type-badge";
-import { ROUTE_RENDERING_CONFIG } from "@/components/rendering-type-badge/constants/contents";
+import { GlobalRenderingTypeBadge, ROUTE_RENDERING_CONFIG } from "@/components/rendering-type-badge";
+
+import { NavItem } from "./components/nav-item";
 
 const HomePage = () => {
   return (
@@ -11,9 +11,9 @@ const HomePage = () => {
         <div className="mt-3 h-0.5 w-8 rounded-full bg-accent" />
 
         <nav className="mt-8 flex w-full max-w-sm flex-col gap-3">
-          <GlobalNavItem description="memorable quotes from what I watched" href="/lines?page=1" label="Lines" />
-          <GlobalNavItem description="movies & series reviews" href="/movies-series?page=1" label="Movies & Series" />
-          <GlobalNavItem disabled description="game logs & reviews" href="#" label="Games" />
+          <NavItem description="memorable quotes from what I watched" href="/lines?page=1" label="Lines" />
+          <NavItem description="movies & series reviews" href="/movies-series?page=1" label="Movies & Series" />
+          <NavItem disabled description="game logs & reviews" href="#" label="Games" />
         </nav>
       </div>
       <GlobalRenderingTypeBadge config={ROUTE_RENDERING_CONFIG["/"]} />

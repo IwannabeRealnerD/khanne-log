@@ -24,7 +24,7 @@ const createRichText = (
   }) as RichTextItemResponse;
 
 describe("src/utils/notion/block-to-markdown -> blockToMarkdown", () => {
-  test("중첩된 글머리 목록이면 깊이에 맞게 들여쓴다", () => {
+  test("indents a nested bulleted list according to its depth", () => {
     const block = {
       bulleted_list_item: {
         color: "default",
@@ -36,7 +36,7 @@ describe("src/utils/notion/block-to-markdown -> blockToMarkdown", () => {
     expect(blockToMarkdown(block, 2)).toBe("    - 중첩된 내용");
   });
 
-  test("북마크 설명과 주소를 마크다운 링크로 변환한다", () => {
+  test("converts a bookmark caption and URL into a Markdown link", () => {
     const block = {
       bookmark: {
         caption: [createRichText("참고 자료")],
@@ -48,7 +48,7 @@ describe("src/utils/notion/block-to-markdown -> blockToMarkdown", () => {
     expect(blockToMarkdown(block)).toBe("[참고 자료](<https://example.com/reference_(1)>)");
   });
 
-  test("서식과 링크가 함께 있으면 서식을 보존한 링크로 변환한다", () => {
+  test("preserves formatting when converting linked rich text", () => {
     const block = {
       paragraph: {
         color: "default",
@@ -65,7 +65,7 @@ describe("src/utils/notion/block-to-markdown -> blockToMarkdown", () => {
     expect(blockToMarkdown(block)).toBe("[***강조***](<https://example.com>)");
   });
 
-  test("지원하지 않는 블록이면 null을 반환한다", () => {
+  test("returns null for an unsupported block type", () => {
     const block = { type: "image" } as BlockObjectResponse;
 
     expect(blockToMarkdown(block)).toBeNull();
