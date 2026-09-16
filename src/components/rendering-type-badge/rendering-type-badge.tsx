@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 
+import { globalCn } from "@/utils/global-cn";
+
 import type { RenderingTypeConfig } from "./types";
 
 interface GlobalRenderingTypeBadgeProps {
@@ -26,9 +28,12 @@ export const GlobalRenderingTypeBadge = ({ config }: GlobalRenderingTypeBadgePro
   }, [isOpen]);
 
   return (
-    <div className="fixed right-4 bottom-4 z-50 flex flex-col items-end gap-2">
+    <div ref={containerRef} className="fixed right-4 bottom-4 z-50 flex flex-col items-end gap-2">
       {isOpen && (
-        <div ref={containerRef} className="max-w-72 rounded-md border border-border bg-surface px-3 py-2.5 shadow-md">
+        <div
+          className="max-w-72 rounded-md border border-edge bg-surface px-3 py-2.5 shadow-md"
+          id="rendering-type-details"
+        >
           <p className="text-default text-caption font-medium">{config.summary}</p>
           <ul className="mt-1 list-disc pl-4 text-caption text-muted">
             {config.details.map((item) => (
@@ -38,7 +43,13 @@ export const GlobalRenderingTypeBadge = ({ config }: GlobalRenderingTypeBadgePro
         </div>
       )}
       <button
-        className="rounded-md border border-border bg-bg-subtle px-3 py-1.5 text-caption text-muted shadow-sm transition-colors hover:bg-bg-muted"
+        aria-controls="rendering-type-details"
+        aria-expanded={isOpen}
+        className={globalCn(
+          "rounded-md border border-edge bg-surface px-3 py-1.5 text-caption text-muted shadow-sm transition-[background-color,border-color,box-shadow,transform] duration-150 ease-out hover:border-edge-hover hover:bg-surface-hover hover:text-fg hover:shadow-md focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:outline-none active:translate-y-px active:bg-bg-muted active:shadow-sm motion-reduce:transform-none motion-reduce:transition-none",
+          isOpen &&
+            "border-edge-selected bg-bg-accent text-accent hover:border-edge-selected hover:bg-bg-accent hover:text-accent"
+        )}
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
       >

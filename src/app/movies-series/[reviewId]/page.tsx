@@ -39,7 +39,7 @@ const ReviewDetailContent = async (props: { reviewId: string }) => {
 
   return (
     <article>
-      <header className="mt-6 border-b border-border pb-8">
+      <header className="mt-6 border-b border-edge pb-8">
         <h1 className="text-h1 leading-h1 font-bold tracking-tight text-fg">{review.title}</h1>
         {review.one_liner ? <p className="mt-3 text-body leading-6 text-muted">“{review.one_liner}”</p> : null}
 
@@ -56,7 +56,7 @@ const ReviewDetailContent = async (props: { reviewId: string }) => {
               {review.key_points.map((keyPoint) => (
                 <li
                   key={keyPoint}
-                  className="rounded-full border border-border bg-bg-subtle px-2.5 py-1 text-caption text-muted"
+                  className="rounded-full border border-edge bg-bg-subtle px-2.5 py-1 text-caption text-muted"
                 >
                   {keyPoint}
                 </li>
@@ -82,7 +82,7 @@ const ReviewDetailContent = async (props: { reviewId: string }) => {
       </header>
 
       {review.markdown ? (
-        <div className="prose prose-sm mt-8 max-w-none text-muted prose-headings:font-semibold prose-headings:tracking-tight prose-headings:text-fg prose-a:text-accent prose-blockquote:border-accent-light prose-blockquote:text-muted prose-hr:border-border">
+        <div className="prose prose-sm mt-8 max-w-none text-muted prose-headings:font-semibold prose-headings:tracking-tight prose-headings:text-fg prose-a:text-accent prose-blockquote:border-accent-light prose-blockquote:text-muted prose-hr:border-edge">
           <Markdown>{review.markdown}</Markdown>
         </div>
       ) : (

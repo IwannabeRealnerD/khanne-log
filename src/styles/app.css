@@ -33,19 +33,20 @@
   --color-accent: var(--color-blue-700);
   --color-accent-light: var(--color-blue-500);
 
-  /* ── Semantic: Border ── */
-  --color-border: var(--color-gray-200);
-  --color-border-accent: var(--color-blue-500);
+  /* ── Semantic: Edge ── */
+  --color-edge: var(--color-gray-200);
+  --color-edge-hover: var(--color-gray-300);
+  --color-edge-selected: var(--color-blue-500);
 
   /* ── Semantic: Surface (cards, sections) ── */
   --color-surface: #ffffff;
   --color-surface-hover: var(--color-gray-50);
 
   /* ── Typography ── */
-  --text-h1: 1.875rem;    /* 30px */
-  --text-h2: 1.5rem;      /* 24px */
-  --text-h3: 1.25rem;     /* 20px */
-  --text-body: 0.875rem;  /* 14px */
+  --text-h1: 1.875rem; /* 30px */
+  --text-h2: 1.5rem; /* 24px */
+  --text-h3: 1.25rem; /* 20px */
+  --text-body: 0.875rem; /* 14px */
   --text-caption: 0.75rem; /* 12px */
 
   --leading-h1: 2.25rem;
@@ -72,4 +73,3 @@ body {
   background-color: var(--color-bg);
   color: var(--color-fg);
 }
-

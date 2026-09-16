@@ -15,7 +15,7 @@ export const Comment: FunctionComponent<CommentProps> = async (props) => {
   }
 
   return (
-    <div className="prose prose-sm max-w-full border-t border-border px-4 py-3 text-muted">
+    <div className="prose prose-sm max-w-full border-t border-edge px-4 py-3 text-muted">
       <Markdown>{comment}</Markdown>
     </div>
   );

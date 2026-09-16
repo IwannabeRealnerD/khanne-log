@@ -40,10 +40,7 @@ export const LineListSection = async (props: { currentPage: number }) => {
       <div className="flex flex-col gap-6">
         {slicedData.map((item) => {
           return (
-            <article
-              key={`${item.id}`}
-              className="rounded-lg border border-border bg-surface shadow-sm transition-shadow hover:shadow-md"
-            >
+            <article key={`${item.id}`} className="rounded-lg border border-edge bg-surface shadow-sm">
               <div className="flex items-start justify-between gap-3 px-4 pt-4 pb-3">
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-2">
@@ -64,7 +61,7 @@ export const LineListSection = async (props: { currentPage: number }) => {
               <Suspense
                 key={item.id}
                 fallback={
-                  <div className="border-t border-border px-4 py-3">
+                  <div className="border-t border-edge px-4 py-3">
                     <div className="flex flex-col gap-1.5">
                       {Array.from({ length: Math.floor(Math.random() * 13) + 3 }).map((_, i) => (
                         <div key={i + 1} className="h-3.5 w-full animate-pulse rounded bg-bg-subtle" />

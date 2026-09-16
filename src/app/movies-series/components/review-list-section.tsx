@@ -37,12 +37,9 @@ export const ReviewListSection = async (props: { currentPage: number }) => {
       <div className="flex flex-col gap-6">
         {slicedData.map((item) => {
           return (
-            <article
-              key={`${item.id}`}
-              className="rounded-lg border border-border bg-surface shadow-sm transition-[border-color,box-shadow] duration-200 focus-within:border-border-accent focus-within:shadow-md hover:border-border-accent hover:shadow-md"
-            >
+            <article key={`${item.id}`}>
               <Link
-                className="block rounded-lg px-5 py-5 outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 sm:px-6 sm:py-6"
+                className="block rounded-lg border border-edge bg-surface px-5 py-5 shadow-sm transition-[background-color,border-color,box-shadow,transform] duration-150 ease-out hover:border-edge-hover hover:bg-surface-hover hover:shadow-md focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:outline-none active:translate-y-px active:bg-bg-muted active:shadow-sm motion-reduce:transform-none motion-reduce:transition-none sm:px-6 sm:py-6"
                 href={GLOBAL_INTERNAL_URL.MOVIES_SERIES_REVIEW(item.id)}
               >
                 <div className="flex items-start justify-between gap-4">
@@ -62,7 +59,7 @@ export const ReviewListSection = async (props: { currentPage: number }) => {
                         {item.key_points.map((keyPoint) => (
                           <li
                             key={keyPoint}
-                            className="rounded-full border border-border bg-bg-subtle px-2.5 py-1 text-caption text-muted"
+                            className="rounded-full border border-edge bg-bg-subtle px-2.5 py-1 text-caption text-muted"
                           >
                             {keyPoint}
                           </li>

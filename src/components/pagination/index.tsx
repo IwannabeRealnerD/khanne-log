@@ -2,8 +2,6 @@ import { FunctionComponent } from "react";
 import type { Route } from "next";
 import Link from "next/link";
 
-import { globalCn } from "@/utils/global-cn";
-
 import { generateVisiblePages } from "./generate-visible-pages";
 
 export { calculateTotalPageCount } from "./calculate-total-page-count";
@@ -14,6 +12,9 @@ interface GlobalPaginationProps {
   basePath?: Route;
 }
 
+const PAGINATION_LINK_CLASS_NAME =
+  "flex size-7 items-center justify-center rounded-md border border-edge bg-surface text-body text-muted shadow-sm transition-[background-color,border-color,box-shadow,transform] duration-150 ease-out hover:border-edge-hover hover:bg-surface-hover hover:text-fg hover:shadow-md focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:outline-none active:translate-y-px active:bg-bg-muted active:shadow-sm motion-reduce:transform-none motion-reduce:transition-none";
+
 export const GlobalPagination: FunctionComponent<GlobalPaginationProps> = (props) => {
   const basePath = props.basePath ?? "/lines";
   const pagesToShow = generateVisiblePages({
@@ -22,12 +23,12 @@ export const GlobalPagination: FunctionComponent<GlobalPaginationProps> = (props
   });
 
   return (
-    <div className="mt-8 mb-5 flex justify-center gap-2">
+    <nav aria-label="페이지 탐색" className="mt-8 mb-5 flex justify-center gap-2">
       {pagesToShow.firstPage && (
         <div className="flex items-center gap-2">
           <Link
             replace
-            className="flex size-7 items-center justify-center rounded-md border border-border text-body"
+            className={PAGINATION_LINK_CLASS_NAME}
             href={`${basePath}?page=${pagesToShow.firstPage}` as Route}
           >
             {pagesToShow.firstPage}
@@ -36,16 +37,20 @@ export const GlobalPagination: FunctionComponent<GlobalPaginationProps> = (props
         </div>
       )}
       {pagesToShow.pages.map((page) => {
+        if (props.currentPage === page) {
+          return (
+            <span
+              key={page}
+              aria-current="page"
+              className="flex size-7 items-center justify-center rounded-md border border-edge-selected bg-bg-accent text-body font-medium text-accent shadow-sm"
+            >
+              {page}
+            </span>
+          );
+        }
+
         return (
-          <Link
-            key={page}
-            replace
-            className={globalCn(
-              "flex size-7 items-center justify-center rounded-md border border-border text-body",
-              props.currentPage === page && "border-border-accent bg-bg-accent text-accent font-medium"
-            )}
-            href={`${basePath}?page=${page}` as Route}
-          >
+          <Link key={page} replace className={PAGINATION_LINK_CLASS_NAME} href={`${basePath}?page=${page}` as Route}>
             {page}
           </Link>
         );
@@ -55,13 +60,13 @@ export const GlobalPagination: FunctionComponent<GlobalPaginationProps> = (props
           <p className="text-subtle">...</p>
           <Link
             replace
-            className="flex size-7 items-center justify-center rounded-md border border-border text-body"
+            className={PAGINATION_LINK_CLASS_NAME}
             href={`${basePath}?page=${pagesToShow.lastPage}` as Route}
           >
             {pagesToShow.lastPage}
           </Link>
         </div>
       )}
-    </div>
+    </nav>
   );
 };
