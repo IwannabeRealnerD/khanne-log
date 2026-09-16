@@ -2,8 +2,9 @@ import { Suspense } from "react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import Markdown from "react-markdown";
+import Markdown, { type Components } from "react-markdown";
 
+import { GlobalHeading } from "@/components/heading";
 import { GlobalOttBadge } from "@/components/ott-badge";
 import { GlobalRenderingTypeBadge, ROUTE_RENDERING_CONFIG } from "@/components/rendering-type-badge";
 
@@ -11,6 +12,12 @@ import { getReviewDetail, getReviewPageData } from "./get-review-detail";
 import ReviewDetailLoading from "./loading";
 
 const DATE_FORMATTER = new Intl.DateTimeFormat("ko", { dateStyle: "long" });
+
+const REVIEW_MARKDOWN_COMPONENTS = {
+  h1: ({ children }) => <GlobalHeading level={2}>{children}</GlobalHeading>,
+  h2: ({ children }) => <GlobalHeading level={3}>{children}</GlobalHeading>,
+  h3: ({ children }) => <GlobalHeading level={4}>{children}</GlobalHeading>,
+} satisfies Components;
 
 const formatDate = (date: string): string => DATE_FORMATTER.format(new Date(date));
 
@@ -41,7 +48,7 @@ const ReviewDetailContent = async (props: Pick<PageProps<"/movies-series/[review
   return (
     <article>
       <header className="mt-6 border-b border-edge pb-8">
-        <h1 className="text-h1 leading-h1 font-bold tracking-tight text-fg">{review.title}</h1>
+        <GlobalHeading level={1}>{review.title}</GlobalHeading>
         {review.one_liner ? <p className="mt-3 text-body leading-6 text-muted">“{review.one_liner}”</p> : null}
 
         <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-3">
@@ -83,8 +90,8 @@ const ReviewDetailContent = async (props: Pick<PageProps<"/movies-series/[review
       </header>
 
       {review.markdown ? (
-        <div className="prose prose-sm mt-8 max-w-none text-muted prose-headings:font-semibold prose-headings:tracking-tight prose-headings:text-fg prose-a:text-accent prose-blockquote:border-accent-light prose-blockquote:text-muted prose-hr:border-edge">
-          <Markdown>{review.markdown}</Markdown>
+        <div className="prose prose-sm mt-8 max-w-none text-muted prose-a:text-accent prose-blockquote:border-accent-light prose-blockquote:text-muted prose-hr:border-edge">
+          <Markdown components={REVIEW_MARKDOWN_COMPONENTS}>{review.markdown}</Markdown>
         </div>
       ) : (
         <p className="mt-8 text-body text-muted">작성된 리뷰 본문이 없습니다.</p>

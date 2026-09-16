@@ -1,12 +1,12 @@
 import { Suspense } from "react";
 
-import { GlobalPageHeading } from "@/components/page-heading";
+import { GlobalHeading } from "@/components/heading";
 
 const LinesLayout = async (props: LayoutProps<"/lines">) => {
   return (
     <>
       <div className="mb-8 pb-4">
-        <GlobalPageHeading>좋아하는 대사</GlobalPageHeading>
+        <GlobalHeading level={1}>좋아하는 대사</GlobalHeading>
         <p className="mt-1 text-caption text-muted italic">memorable quotes from what I watched</p>
       </div>
       <Suspense>{props.children}</Suspense>

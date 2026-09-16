@@ -58,7 +58,7 @@ export const Title: FunctionComponent<TitleProps> = (props) => {
         >
           <p
             className={globalCn(
-              "text-base leading-relaxed font-medium text-fg md:text-h3 md:leading-h3",
+              "text-base leading-relaxed font-medium text-fg md:text-xl md:leading-7",
               isDescription && "text-muted italic"
             )}
           >
@@ -69,7 +69,7 @@ export const Title: FunctionComponent<TitleProps> = (props) => {
       ) : (
         <p
           className={globalCn(
-            "text-base leading-relaxed font-medium text-fg md:text-h3 md:leading-h3",
+            "text-base leading-relaxed font-medium text-fg md:text-xl md:leading-7",
             isDescription && "text-muted italic"
           )}
         >
