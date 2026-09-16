@@ -46,7 +46,7 @@ export const GlobalRenderingTypeBadge = ({ config }: GlobalRenderingTypeBadgePro
         aria-controls="rendering-type-details"
         aria-expanded={isOpen}
         className={globalCn(
-          "rounded-md border border-edge bg-surface px-3 py-1.5 text-caption text-muted shadow-sm transition-[background-color,border-color,box-shadow,transform] duration-150 ease-out hover:border-edge-hover hover:bg-surface-hover hover:text-fg hover:shadow-md focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:outline-none active:translate-y-px active:bg-bg-muted active:shadow-sm motion-reduce:transform-none motion-reduce:transition-none",
+          "interactive rounded-md px-3 py-1.5 text-caption text-muted hover:text-fg",
           isOpen &&
             "border-edge-selected bg-bg-accent text-accent hover:border-edge-selected hover:bg-bg-accent hover:text-accent"
         )}

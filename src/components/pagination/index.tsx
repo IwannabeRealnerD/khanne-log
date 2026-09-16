@@ -13,7 +13,7 @@ interface GlobalPaginationProps {
 }
 
 const PAGINATION_LINK_CLASS_NAME =
-  "flex size-7 items-center justify-center rounded-md border border-edge bg-surface text-body text-muted shadow-sm transition-[background-color,border-color,box-shadow,transform] duration-150 ease-out hover:border-edge-hover hover:bg-surface-hover hover:text-fg hover:shadow-md focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:outline-none active:translate-y-px active:bg-bg-muted active:shadow-sm motion-reduce:transform-none motion-reduce:transition-none";
+  "interactive flex size-7 items-center justify-center rounded-md text-body text-muted hover:text-fg";
 
 export const GlobalPagination: FunctionComponent<GlobalPaginationProps> = (props) => {
   const basePath = props.basePath ?? "/lines";

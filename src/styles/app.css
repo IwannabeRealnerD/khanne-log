@@ -73,3 +73,27 @@ body {
   background-color: var(--color-bg);
   color: var(--color-fg);
 }
+
+@layer components {
+  .interactive {
+    @apply border border-edge bg-surface shadow-sm transition-[background-color,border-color,box-shadow,transform] duration-150 ease-out;
+  }
+
+  .interactive:hover {
+    @apply border-edge-hover bg-surface-hover shadow-md;
+  }
+
+  .interactive:focus-visible {
+    @apply ring-2 ring-accent ring-offset-2 outline-none;
+  }
+
+  .interactive:active {
+    @apply translate-y-px bg-bg-muted shadow-sm;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .interactive {
+      @apply transform-none transition-none;
+    }
+  }
+}

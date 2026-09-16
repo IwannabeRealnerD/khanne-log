@@ -39,7 +39,7 @@ export const ReviewListSection = async (props: { currentPage: number }) => {
           return (
             <article key={`${item.id}`}>
               <Link
-                className="block rounded-lg border border-edge bg-surface px-5 py-5 shadow-sm transition-[background-color,border-color,box-shadow,transform] duration-150 ease-out hover:border-edge-hover hover:bg-surface-hover hover:shadow-md focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:outline-none active:translate-y-px active:bg-bg-muted active:shadow-sm motion-reduce:transform-none motion-reduce:transition-none sm:px-6 sm:py-6"
+                className="interactive block rounded-lg px-5 py-5 sm:px-6 sm:py-6"
                 href={GLOBAL_INTERNAL_URL.MOVIES_SERIES_REVIEW(item.id)}
               >
                 <div className="flex items-start justify-between gap-4">

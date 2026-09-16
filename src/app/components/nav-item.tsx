@@ -23,10 +23,7 @@ export const NavItem: FunctionComponent<NavItemProps> = ({ href, label, descript
   }
 
   return (
-    <Link
-      className="rounded-md border border-edge bg-surface px-6 py-5 shadow-sm transition-[background-color,border-color,box-shadow,transform] duration-150 ease-out hover:border-edge-hover hover:bg-surface-hover hover:shadow-md focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:outline-none active:translate-y-px active:bg-bg-muted active:shadow-sm motion-reduce:transform-none motion-reduce:transition-none"
-      href={href}
-    >
+    <Link className="interactive rounded-md px-6 py-5" href={href}>
       <p className="text-body font-medium text-fg">{label}</p>
       <p className="mt-1 text-caption text-muted">{description}</p>
     </Link>
