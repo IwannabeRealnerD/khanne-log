@@ -7,14 +7,22 @@ export const boundaryConfigs = defineConfig([
     files: ["src/**/*.{ts,tsx}"],
     plugins: { boundaries: boundariesPlugin },
     rules: {
-      "boundaries/element-types": [
+      "boundaries/dependencies": [
         "error",
         {
           default: "allow",
-          rules: [
+          policies: [
             {
-              disallow: "app",
-              from: ["apis", "hooks", "types", "utils", "constants", "components"],
+              disallow: {
+                to: { element: { type: "app" } },
+              },
+              from: {
+                element: {
+                  types: {
+                    anyOf: ["apis", "hooks", "types", "utils", "constants", "components"],
+                  },
+                },
+              },
             },
           ],
         },

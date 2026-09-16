@@ -30,8 +30,9 @@ export const generateMetadata = async (props: PageProps<"/movies-series/[reviewI
 };
 /* eslint-enable @typescript-eslint/naming-convention */
 
-const ReviewDetailContent = async (props: { reviewId: string }) => {
-  const review = await getReviewDetail(props.reviewId);
+const ReviewDetailContent = async (props: Pick<PageProps<"/movies-series/[reviewId]">, "params">) => {
+  const { reviewId } = await props.params;
+  const review = await getReviewDetail(reviewId);
 
   if (!review) {
     notFound();
@@ -92,13 +93,11 @@ const ReviewDetailContent = async (props: { reviewId: string }) => {
   );
 };
 
-const MoviesSeriesReviewDetailPage = async (props: PageProps<"/movies-series/[reviewId]">) => {
-  const { reviewId } = await props.params;
-
+const MoviesSeriesReviewDetailPage = (props: PageProps<"/movies-series/[reviewId]">) => {
   return (
     <>
       <Suspense fallback={<ReviewDetailLoading />}>
-        <ReviewDetailContent reviewId={reviewId} />
+        <ReviewDetailContent params={props.params} />
       </Suspense>
       <GlobalRenderingTypeBadge config={ROUTE_RENDERING_CONFIG["/movies-series/[reviewId]"]} />
     </>

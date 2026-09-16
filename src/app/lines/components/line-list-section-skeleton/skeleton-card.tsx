@@ -1,4 +1,6 @@
 export const LineSkeletonCard = ({ lines }: { lines: number }) => {
+  const quoteWidth = 60 + ((lines * 7) % 40);
+
   return (
     <div className="rounded-lg border border-edge shadow-sm">
       {/* Header */}
@@ -15,7 +17,7 @@ export const LineSkeletonCard = ({ lines }: { lines: number }) => {
       {/* Quote & Scene Description */}
       <div className="border-t border-edge bg-bg-subtle px-4 py-4">
         <div className="flex flex-col gap-2">
-          <div className="h-5 animate-pulse rounded bg-bg-muted" style={{ width: `${60 + Math.random() * 40}%` }} />
+          <div className="h-5 animate-pulse rounded bg-bg-muted" style={{ width: `${quoteWidth}%` }} />
         </div>
       </div>
       {/* Comment */}
