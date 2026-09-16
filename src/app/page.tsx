@@ -1,3 +1,4 @@
+import { GlobalHeading } from "@/components/heading";
 import { GlobalRenderingTypeBadge, ROUTE_RENDERING_CONFIG } from "@/components/rendering-type-badge";
 
 import { NavItem } from "./components/nav-item";
@@ -6,7 +7,7 @@ const HomePage = () => {
   return (
     <>
       <div className="flex min-h-[60vh] flex-col items-center justify-center">
-        <h2 className="text-h2 font-bold tracking-tight text-fg">Khanne Log</h2>
+        <GlobalHeading level={1}>Khanne Log</GlobalHeading>
         <p className="mt-2 text-body text-muted">movies, series, and games I love</p>
         <div className="mt-3 h-0.5 w-8 rounded-full bg-accent" />
 

@@ -25,7 +25,7 @@ const RootLayout = async (props: LayoutProps<"/">) => {
               href="/"
             >
               {/* eslint-disable-next-line @cspell/spellchecker */}
-              <span className="text-h3 font-bold text-accent">K</span>hanne Log
+              <span className="text-xl font-bold text-accent">K</span>hanne Log
             </Link>
             <Suspense fallback={NAVIGATION_FALLBACK}>
               <Navigation />

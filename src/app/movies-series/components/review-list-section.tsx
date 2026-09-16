@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { GlobalHeading } from "@/components/heading";
 import { GlobalOttBadge } from "@/components/ott-badge";
 import { calculateTotalPageCount, GlobalPagination } from "@/components/pagination";
 import { GLOBAL_DATABASE_NAME } from "@/constants/database-name";
@@ -45,7 +46,7 @@ export const ReviewListSection = async (props: { currentPage: number }) => {
                 <div className="flex items-start justify-between gap-4">
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1">
-                      <h3 className="text-h3 leading-h3 font-semibold tracking-tight text-fg">{item.title}</h3>
+                      <GlobalHeading level={2}>{item.title}</GlobalHeading>
                       {item.from.length > 0 && (
                         <div aria-label="감상 채널" className="flex items-center gap-2">
                           {item.from.map((ottName) => (

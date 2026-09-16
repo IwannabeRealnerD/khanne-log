@@ -1,11 +1,12 @@
 import Link from "next/link";
 
+import { GlobalHeading } from "@/components/heading";
 import { GLOBAL_INTERNAL_URL } from "@/constants/internal-url";
 
 const ReviewDetailNotFound = () => {
   return (
     <div className="rounded-lg border border-edge bg-bg-subtle px-6 py-10 text-center">
-      <h1 className="text-h3 font-semibold text-fg">리뷰를 찾을 수 없습니다</h1>
+      <GlobalHeading level={1}>리뷰를 찾을 수 없습니다</GlobalHeading>
       <p className="mt-2 text-body text-muted">존재하지 않거나 아직 공개되지 않은 리뷰입니다.</p>
       <Link
         className="interactive mt-5 inline-flex rounded-md px-3 py-2 text-caption text-muted hover:text-fg"

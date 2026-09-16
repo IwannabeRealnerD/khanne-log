@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 
+import { GlobalHeading } from "@/components/heading";
 import { GlobalRenderingTypeBadge, ROUTE_RENDERING_CONFIG } from "@/components/rendering-type-badge";
 
 import { ReviewListSection } from "./components/review-list-section";
@@ -15,6 +16,10 @@ const MoviesSeriesPageContent = async (props: Pick<PageProps<"/movies-series">, 
 const MoviesSeriesPage = (props: PageProps<"/movies-series">) => {
   return (
     <>
+      <div className="mb-8 pb-4">
+        <GlobalHeading level={1}>작품 리뷰</GlobalHeading>
+        <p className="mt-1 text-caption text-muted italic">movies &amp; series reviews</p>
+      </div>
       <Suspense fallback={<ReviewListSectionSkeleton />}>
         <MoviesSeriesPageContent searchParams={props.searchParams} />
       </Suspense>

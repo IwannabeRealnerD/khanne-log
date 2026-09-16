@@ -39,12 +39,20 @@ export const LineListSection = async (props: { currentPage: number }) => {
     <div className="flex flex-col gap-2">
       <div className="flex flex-col gap-6">
         {slicedData.map((item, itemIndex) => {
+          const titleId = `line-${item.id}-title`;
+
           return (
-            <article key={`${item.id}`} className="rounded-lg border border-edge bg-surface shadow-sm">
+            <article
+              key={`${item.id}`}
+              aria-labelledby={titleId}
+              className="rounded-lg border border-edge bg-surface shadow-sm"
+            >
               <div className="flex items-start justify-between gap-3 px-4 pt-4 pb-3">
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-2">
-                    <h3 className="text-body font-semibold text-fg">{item.title}</h3>
+                    <p className="text-body font-semibold text-fg" id={titleId}>
+                      {item.title}
+                    </p>
                     <GlobalOttBadge ottName={item.from} />
                   </div>
                   <div className="mt-0.5 flex items-center gap-1.5 text-caption text-muted">
