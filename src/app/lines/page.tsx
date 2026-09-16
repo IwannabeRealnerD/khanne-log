@@ -5,14 +5,18 @@ import { GlobalRenderingTypeBadge, ROUTE_RENDERING_CONFIG } from "@/components/r
 import { LineListSection } from "./components/line-list-section";
 import { LineListSectionSkeleton } from "./components/line-list-section-skeleton";
 
-const LinePage = async (props: PageProps<"/lines">) => {
+const LinePageContent = async (props: Pick<PageProps<"/lines">, "searchParams">) => {
   const { page } = await props.searchParams;
   const currentPage = page ? Number(page) : 1;
 
+  return <LineListSection currentPage={currentPage} />;
+};
+
+const LinePage = (props: PageProps<"/lines">) => {
   return (
     <>
-      <Suspense key={currentPage} fallback={<LineListSectionSkeleton />}>
-        <LineListSection currentPage={currentPage} />
+      <Suspense fallback={<LineListSectionSkeleton />}>
+        <LinePageContent searchParams={props.searchParams} />
       </Suspense>
       <GlobalRenderingTypeBadge config={ROUTE_RENDERING_CONFIG["/lines"]} />
     </>

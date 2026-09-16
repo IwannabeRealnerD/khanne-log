@@ -1,8 +1,8 @@
 import { FunctionComponent } from "react";
 
 import { RiMovieLine } from "react-icons/ri";
-import { SiAmazonprime, SiAppletv, SiHbo, SiNetflix } from "react-icons/si";
-import { TbBrandDisney } from "react-icons/tb";
+import { SiAppletv, SiHbo, SiNetflix } from "react-icons/si";
+import { TbBrandAmazon, TbBrandDisney } from "react-icons/tb";
 
 import { GlobalOttServiceName } from "@/types/ott-service-name";
 
@@ -61,7 +61,7 @@ export const GlobalOttBadge: FunctionComponent<OttBadgeProps> = (props) => {
     case "Movie":
       return <RiMovieLine className="text-base text-muted" title={ottName} />;
     case "Amazon Prime":
-      return <SiAmazonprime className="text-base text-blue-500" title={ottName} />;
+      return <TbBrandAmazon className="text-base text-blue-500" title={ottName} />;
     default:
       return <span className="text-caption text-muted">{ottName}</span>;
   }
