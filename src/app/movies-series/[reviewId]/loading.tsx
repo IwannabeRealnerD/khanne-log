@@ -3,7 +3,7 @@ const ReviewDetailLoading = () => {
     <div aria-label="리뷰를 불러오는 중" className="animate-pulse">
       <div className="h-4 w-20 rounded bg-bg-muted" />
       <div className="mt-6 border-b border-edge pb-8">
-        <div className="h-9 w-3/5 rounded bg-bg-muted" />
+        <div className="h-7 w-3/5 rounded bg-bg-muted" />
         <div className="mt-3 h-5 w-2/5 rounded bg-bg-subtle" />
         <div className="mt-5 flex gap-2">
           <div className="h-6 w-16 rounded-full bg-bg-subtle" />
