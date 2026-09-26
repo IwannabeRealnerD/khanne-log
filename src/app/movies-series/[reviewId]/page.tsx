@@ -10,6 +10,7 @@ import { GlobalRenderingTypeBadge, ROUTE_RENDERING_CONFIG } from "@/components/r
 
 import { getReviewDetail, getReviewPageData } from "./get-review-detail";
 import ReviewDetailLoading from "./loading";
+import styles from "./review-markdown.module.css";
 
 const DATE_FORMATTER = new Intl.DateTimeFormat("ko", { dateStyle: "long" });
 
@@ -47,8 +48,9 @@ const ReviewDetailContent = async (props: Pick<PageProps<"/movies-series/[review
 
   return (
     <article>
+      <h1 className="sr-only">작품 리뷰</h1>
       <header className="mt-6 border-b border-edge pb-8">
-        <GlobalHeading level={1}>{review.title}</GlobalHeading>
+        <GlobalHeading level={2}>{review.title}</GlobalHeading>
         {review.one_liner ? <p className="mt-3 text-body leading-6 text-muted">“{review.one_liner}”</p> : null}
 
         <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-3">
@@ -90,7 +92,7 @@ const ReviewDetailContent = async (props: Pick<PageProps<"/movies-series/[review
       </header>
 
       {review.markdown ? (
-        <div className="prose prose-sm mt-8 max-w-none text-muted prose-a:text-accent prose-blockquote:border-accent-light prose-blockquote:text-muted prose-hr:border-edge">
+        <div className={`prose prose-sm mt-8 max-w-none prose-a:text-accent prose-hr:border-edge ${styles.markdown}`}>
           <Markdown components={REVIEW_MARKDOWN_COMPONENTS}>{review.markdown}</Markdown>
         </div>
       ) : (
