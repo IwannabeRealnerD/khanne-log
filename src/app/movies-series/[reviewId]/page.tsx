@@ -2,23 +2,15 @@ import { Suspense } from "react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import Markdown, { type Components } from "react-markdown";
-
 import { GlobalHeading } from "@/components/heading";
+import { GlobalMarkdownContent } from "@/components/markdown-content";
 import { GlobalOttBadge } from "@/components/ott-badge";
 import { GlobalRenderingTypeBadge, ROUTE_RENDERING_CONFIG } from "@/components/rendering-type-badge";
 
 import { getReviewDetail, getReviewPageData } from "./get-review-detail";
 import ReviewDetailLoading from "./loading";
-import styles from "./review-markdown.module.css";
 
 const DATE_FORMATTER = new Intl.DateTimeFormat("ko", { dateStyle: "long" });
-
-const REVIEW_MARKDOWN_COMPONENTS = {
-  h1: ({ children }) => <GlobalHeading level={2}>{children}</GlobalHeading>,
-  h2: ({ children }) => <GlobalHeading level={3}>{children}</GlobalHeading>,
-  h3: ({ children }) => <GlobalHeading level={4}>{children}</GlobalHeading>,
-} satisfies Components;
 
 const formatDate = (date: string): string => DATE_FORMATTER.format(new Date(date));
 
@@ -92,9 +84,7 @@ const ReviewDetailContent = async (props: Pick<PageProps<"/movies-series/[review
       </header>
 
       {review.markdown ? (
-        <div className={`prose prose-sm mt-8 max-w-none prose-a:text-accent prose-hr:border-edge ${styles.markdown}`}>
-          <Markdown components={REVIEW_MARKDOWN_COMPONENTS}>{review.markdown}</Markdown>
-        </div>
+        <GlobalMarkdownContent className="mt-8" headingStartLevel={2} markdown={review.markdown} />
       ) : (
         <p className="mt-8 text-body text-muted">작성된 리뷰 본문이 없습니다.</p>
       )}

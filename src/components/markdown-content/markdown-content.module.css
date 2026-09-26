@@ -4,24 +4,30 @@
   line-height: 1.85;
 }
 
-.markdown h3,
-.markdown h4 {
+.markdown .heading1,
+.markdown .heading2,
+.markdown .heading3 {
   color: var(--color-fg);
   letter-spacing: -0.015em;
+  font-weight: 600;
 }
 
-.markdown h3 {
+.markdown .heading1 {
+  margin: 28px 0 10px;
+  font-size: 20px;
+  line-height: 1.4;
+}
+
+.markdown .heading2 {
   margin: 28px 0 10px;
   font-size: 16px;
   line-height: 1.5;
-  font-weight: 600;
 }
 
-.markdown h4 {
+.markdown .heading3 {
   margin: 24px 0 8px;
   font-size: 14px;
   line-height: 1.6;
-  font-weight: 600;
 }
 
 .markdown > :first-child {
@@ -30,6 +36,10 @@
 
 .markdown p {
   margin: 0 0 14px;
+}
+
+.markdown a {
+  color: var(--color-accent);
 }
 
 .markdown strong {
@@ -48,6 +58,10 @@
 
 .markdown blockquote p {
   margin: 0;
+}
+
+.markdown hr {
+  border-color: var(--color-edge);
 }
 
 .markdown ul {
