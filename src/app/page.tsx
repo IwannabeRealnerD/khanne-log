@@ -9,7 +9,6 @@ const HomePage = () => {
       <div className="flex min-h-[60vh] flex-col items-center justify-center">
         <GlobalHeading level={1}>Khanne Log</GlobalHeading>
         <p className="mt-2 text-body text-muted">movies, series, and games I love</p>
-        <div className="mt-3 h-0.5 w-8 rounded-full bg-accent" />
 
         <nav className="mt-8 flex w-full max-w-sm flex-col gap-3">
           <NavItem description="memorable quotes from what I watched" href="/lines?page=1" label="Lines" />
