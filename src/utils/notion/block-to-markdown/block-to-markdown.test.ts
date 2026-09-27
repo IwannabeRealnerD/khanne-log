@@ -1,4 +1,8 @@
+import { createElement } from "react";
+
 import type { BlockObjectResponse, RichTextItemResponse } from "@notionhq/client/build/src/api-endpoints";
+import { renderToStaticMarkup } from "react-dom/server";
+import Markdown from "react-markdown";
 import { describe, expect, test } from "vitest";
 
 import { blockToMarkdown } from ".";
@@ -63,6 +67,24 @@ describe("src/utils/notion/block-to-markdown -> blockToMarkdown", () => {
     } as BlockObjectResponse;
 
     expect(blockToMarkdown(block)).toBe("[***강조***](<https://example.com>)");
+  });
+
+  test("renders emphasis when formatted text includes surrounding spaces", () => {
+    const block = {
+      paragraph: {
+        color: "default",
+        rich_text: [
+          createRichText("앞"),
+          createRichText(' "글자글자" ', { annotations: { bold: true, italic: true } }),
+          createRichText("뒤"),
+        ],
+      },
+      type: "paragraph",
+    } as BlockObjectResponse;
+
+    const html = renderToStaticMarkup(createElement(Markdown, null, blockToMarkdown(block)));
+
+    expect(html).toBe("<p>앞 <em><strong>&quot;글자글자&quot;</strong></em> 뒤</p>");
   });
 
   test("returns null for an unsupported block type", () => {

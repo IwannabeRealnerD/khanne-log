@@ -2,10 +2,31 @@ import type { BlockObjectResponse, RichTextItemResponse } from "@notionhq/client
 
 type MarkdownRichText = Pick<RichTextItemResponse, "annotations" | "href" | "plain_text">;
 
+const splitOuterSpaces = (text: string) => {
+  let start = 0;
+  let end = text.length;
+
+  while (text[start] === " " || text[start] === "\t") {
+    start++;
+  }
+  while (end > start && (text[end - 1] === " " || text[end - 1] === "\t")) {
+    end--;
+  }
+
+  return {
+    leading: text.slice(0, start),
+    content: text.slice(start, end),
+    trailing: text.slice(end),
+  };
+};
+
 const formatRichText = (richTexts: MarkdownRichText[]): string =>
   richTexts
     .map((richText) => {
-      let text = richText.plain_text;
+      const hasEmphasis =
+        richText.annotations.bold || richText.annotations.italic || richText.annotations.strikethrough;
+      const outerSpaces = hasEmphasis && !richText.annotations.code ? splitOuterSpaces(richText.plain_text) : null;
+      let text = outerSpaces?.content || richText.plain_text;
 
       if (richText.annotations.code) {
         text = `\`${text}\``;
@@ -18,6 +39,9 @@ const formatRichText = (richTexts: MarkdownRichText[]): string =>
       }
       if (richText.annotations.strikethrough) {
         text = `~~${text}~~`;
+      }
+      if (outerSpaces?.content) {
+        text = `${outerSpaces.leading}${text}${outerSpaces.trailing}`;
       }
       if (richText.href) {
         text = `[${text}](<${richText.href}>)`;
