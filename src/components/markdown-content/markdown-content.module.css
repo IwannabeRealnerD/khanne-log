@@ -4,24 +4,32 @@
   line-height: 1.85;
 }
 
-.markdown h3,
-.markdown h4 {
+.markdown .heading1,
+.markdown .heading2,
+.markdown .heading3 {
   color: var(--color-fg);
   letter-spacing: -0.015em;
 }
 
-.markdown h3 {
+.markdown .heading1 {
+  margin: 28px 0 10px;
+  font-size: 20px;
+  line-height: 1.4;
+  font-weight: 700;
+}
+
+.markdown .heading2 {
   margin: 28px 0 10px;
   font-size: 16px;
   line-height: 1.5;
   font-weight: 600;
 }
 
-.markdown h4 {
+.markdown .heading3 {
   margin: 24px 0 8px;
   font-size: 14px;
   line-height: 1.6;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .markdown > :first-child {
@@ -30,6 +38,18 @@
 
 .markdown p {
   margin: 0 0 14px;
+}
+
+.markdown li > p:last-child {
+  margin-bottom: 0;
+}
+
+.markdown li > p:has(+ :is(ul, ol)) {
+  margin-bottom: 0;
+}
+
+.markdown a {
+  color: var(--color-accent);
 }
 
 .markdown strong {
@@ -50,9 +70,18 @@
   margin: 0;
 }
 
-.markdown ul {
+.markdown hr {
+  margin: 0 0 16px;
+  border-color: var(--color-edge);
+}
+
+.markdown :is(ul, ol) {
   margin: 8px 0 18px;
   padding-left: 20px;
+}
+
+.markdown li > :is(ul, ol):last-child {
+  margin-bottom: 0;
 }
 
 .markdown li {

@@ -47,7 +47,7 @@ const getBlockMarkdown = async (client: Client, blockId: string, depth = 0): Pro
   return lines;
 };
 
-export const getPageMarkdown = async (pageId: string): Promise<string> => {
+export const getNotionPostBodyMarkdown = async (pageId: string): Promise<string> => {
   "use cache";
   cacheLife("hours");
 
