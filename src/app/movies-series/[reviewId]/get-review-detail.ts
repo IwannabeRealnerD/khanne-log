@@ -2,7 +2,7 @@ import { cacheLife } from "next/cache";
 
 import { APIErrorCode, Client, isFullPage, isNotionClientError } from "@notionhq/client";
 
-import { getPageMarkdown } from "@/utils/notion/get-page-markdown";
+import { getNotionPostBodyMarkdown } from "@/utils/notion/get-notion-post-body-markdown";
 
 import type { ReviewDetail, ReviewPageData } from "./types";
 
@@ -96,7 +96,7 @@ export const getReviewDetail = async (pageId: string): Promise<ReviewDetail | nu
     return null;
   }
 
-  const markdown = await getPageMarkdown(review.id);
+  const markdown = await getNotionPostBodyMarkdown(review.id);
 
   return { ...review, markdown };
 };

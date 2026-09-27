@@ -1,14 +1,14 @@
 import { FunctionComponent } from "react";
 
 import { GlobalMarkdownContent } from "@/components/markdown-content";
-import { getPageMarkdown } from "@/utils/notion/get-page-markdown";
+import { getNotionPostBodyMarkdown } from "@/utils/notion/get-notion-post-body-markdown";
 
 interface CommentProps {
   pageId: string;
 }
 
 export const Comment: FunctionComponent<CommentProps> = async (props) => {
-  const comment = await getPageMarkdown(props.pageId);
+  const comment = await getNotionPostBodyMarkdown(props.pageId);
   if (!comment) {
     return null;
   }
